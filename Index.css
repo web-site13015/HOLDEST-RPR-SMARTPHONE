@@ -65,3 +65,18 @@ body {
 .user-account a:hover {
     background-color: #ddd;
 }
+
+
+
+
+
+  .container {
+    display: flex;
+  }
+  .element1 {
+    flex: 75px;
+  }
+  .element2 {
+    flex: 0;
+  }
+
