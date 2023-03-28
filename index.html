@@ -11,28 +11,6 @@
   
 <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/3b3ff413dfd00966aab963ce0/1d331dfc2c697d011f575e7ab.js");</script>
 
-<?php
-
-$url = 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNjgwMDAzMjgxLCJzdWIiOiJiNTQyOTBiYS00NTIyLTQwYTAtYTZhNi0wYmMyYjg4M2RkOTV-UFJPRFVDVElPTn4zYTdjYjBjZi0zMTE0LTRlYzEtYmQyZi04ODIxNDM5ODgxNmYifQ.lcihR7whB9jxadJFQJ9C9LHic2va9GizH_eKbJ-NY0c';
-$headers = [
-  'Authorization: Bearer meowmeowmeow',
-];
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-$response = curl_exec($ch);
-
-if ($response === false) {
-  echo 'Erreur Curl : ' . curl_error($ch);
-} else {
-  echo $response;
-}
-
-curl_close($ch);
-
-?>
 
 
 <!-- Snap Pixel Code -->
