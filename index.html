@@ -3,161 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OldestStream</title>
+    <title>FluxOldest</title>
     <!-- Ajoutez vos liens vers les fichiers CSS ici -->
     <style>
+        
 
-  /* Polices */ @import url('https://fonts.googleapis.com/css2?family=Anta&family=Roboto+Slab&display=swap'); body { font-family: 'Anta', sans-serif; margin: 0; padding: 0; background-color: #282c35; color: #fff; }
-        /* Header */ header { background-color: #222; padding: 20px; text-align: center; } header h1 { font-family: 'Roboto Slab', serif; font-size: 2.5em; margin-bottom: 10px; color: #fff; border: 2px solid #fff; padding: 10px 20px; display: inline-block; } nav ul { list-style-type: none; padding: 0; text-align: center; } nav ul li { display: inline-block; margin-right: 20px; } nav ul li a { color: #fff; text-decoration: none; font-size: 1.2em; padding: 10px 20px; border: 2px solid #fff; border-radius: 20px; transition: all 0.3s ease; display: block; margin-bottom: 10px; } nav ul li a:hover { background-color: #fff; color: #222; }
-        
-        /* Main */ main { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; } .categoryVideos { width: 300px; margin: 20px; padding: 15px; border: 1px solid #4CAF50; background-color: #1e2229; border-radius: 10px; overflow: hidden; } .video-container { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; /* Ratio 16:9 */ overflow: hidden; border-radius: 10px; margin-bottom: 20px; } .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; } .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; } .video-container:hover .overlay { opacity: 1; } .watch-button { background-color: rgba(0, 0, 0, 0.7); color: white; padding: 10px 20px; border: none; border-radius: 50%; cursor: pointer; z-index: 1; } .description { margin-bottom: 10px; } .video-info { margin-bottom: 10px; } .video-info span { margin-right: 10px; } .rating { margin-bottom: 10px; } .rating .stars { color: gold; margin-right: 10px; } 
-        
-        
-        
-        
-        
-        
-        
- /* Modal */
+
+        /* Ajoutez ici le CSS que vous avez déjà fourni */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap');
+
+/* Styles généraux */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #34495e;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    margin: 0;
+    color: #fff;
+}
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin: 20px 0 0 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 10px 20px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+    color: #34495e;
+}
+
+/* Main */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.categoryVideos {
+    width: 350px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-container:hover .overlay {
+    opacity: 1;
+}
+
+.watch-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.description, .video-info, .rating {
+    margin-bottom: 10px;
+}
+
+.video-info span {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.rating .stars {
+    color: gold;
+    margin-right: 10px;
+}
+
+/* Modal */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal-content {
-  background-color: #1e2229;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 380px;
-  border-radius: 10px;
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 label {
-  font-size: 18px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 input {
-  padding: 12px;
-  border: 1px solid #4CAF50;
-  border-radius: 5px;
-  font-size: 16px;
+    padding: 12px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 button[type="submit"] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+    background-color: #34495e;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-#error-message,
-#success-message {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 16px;
+#error-message, #success-message {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
 }
 
 #error-message {
-  color: #ff6347;
+    color: #e74c3c;
 }
 
 #success-message {
-  color: #00ff00;
+    color: #2ecc71;
 }
 
 /* Styles pour les appareils mobiles */
 @media (max-width: 480px) {
-  .modal-content {
-    width: 90%;
-    margin: 20% auto;
-  }
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+    }
 
-  label {
-    font-size: 16px;
-  }
+    label {
+        font-size: 14px;
+    }
 
-  input,
-  button[type="submit"] {
-    font-size: 14px;
-  }
-}       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /* Menu Bar */ .menu-icon { display: block; background-color: #333; padding: 10px 15px; position: fixed; top: 0; right: 0; z-index: 9999; } .menu-icon span { background-color: white; display: block; width: 25px; height: 3px; margin-bottom: 5px; } .menu-bar { background-color: rgba(255, 255, 255, 0.3); padding: 20px; position: fixed; top: 0; right: 0; z-index: 9998; width: 200px; display: none; backdrop-filter: blur(10px); } .profile-info { color: white; padding: 10px; border-bottom: 1px solid #fff; } .profile-button { background-color: red; padding: 5px 10px; border-radius: 5px; color: white; margin-top: 10px; } .profile-button:hover { background-color: #ff6347; } .profile-button-green { background-color: green; } .profile-button-green:hover { background-color: #4CAF50; } /* Catégorie Dropdown */ #categorieDropdown { display: none; position: fixed; top: 0; left: 0; width: 100%; background-color: #333; border-bottom: 1px solid #ccc; } #categorieDropdown ul { list-style-type: none; padding: 0; } #categorieDropdown ul li { padding: 10px; cursor: pointer; } #categorieDropdown ul li:hover { background-color: #ddd; }
+    input, button[type="submit"] {
+        font-size: 14px;
+    }
+}
 
+/* Menu Bar */
+.menu-icon {
+    display: block;
+    background-color: #34495e;
+    padding: 10px 15px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+}
 
+.menu-icon span {
+    background-color: white;
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin-bottom: 5px;
+}
 
-      #featured {
-  text-align: center;
-  padding: 20px;
-  
-  margin: 0 auto;
-  max-width: 800px;
+.menu-bar {
+    background-color: #34495e;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9998;
+    width: 200px;
+    display: none;
+    box-shadow: -2px 0 4px rgba(0,0,0,0.2);
+}
+
+.profile-info {
+    color: white;
+    padding: 10px;
+    border-bottom: 1px solid #fff;
+}
+
+.profile-button {
+    background-color: #e74c3c;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    margin-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-button:hover {
+    background-color: #c0392b;
+}
+
+/* Catégorie Dropdown */
+#categorieDropdown {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #34495e;
+    border-bottom: 1px solid #ccc;
+}
+
+#categorieDropdown ul {
+    list-style: none;
+    padding: 0;
+}
+
+#categorieDropdown ul li {
+    padding: 10px;
+    cursor: pointer;
+    color: #fff;
+}
+
+#categorieDropdown ul li:hover {
+    background-color: #2c3e50;
+}
+
+/* Featured Section */
+#featured {
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+    max-width: 800px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 #featured h2 {
-  margin-top: 0;
+    margin-top: 0;
+    color: #34495e;
+    font-family: 'Montserrat', sans-serif;
 }
+
+.featured-info {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.featured-info span {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.no-ads {
+    background-color: #2ecc71;
+    color: #fff;
+}
+
+.work-in-progress {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+/* Support Box */
+.support-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.support-box p {
+    margin: 0;
+    color: #333;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.play-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.play-btn:hover {
+    background-color: #c0392
+
+
+
+}
+
+/* Footer */
+footer {
+    background-color: #34495e;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 90%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 368px) {
+    .categoryVideos {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .featured-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .featured-info span {
+        margin: 5px 0;
+    }
+}
+
+/* Animations */
+@keyframes slideDown {
+    from {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#featured {
+    animation: slideDown 0.5s ease-in-out;
+    }
+
     </style>
 </head>
 <body>
 
     <header>
-        <h1>OldestStream</h1>
+        <h1>OldestFlux</h1>
         <nav>
             <ul>
                 <li><button id="accueilButton">Accueil</button></li>
-               
                 <li><button id="categorieBtn">Catégorie</button></li>
-                    <button id="signupButton">Inscription</button>
-    <button id="loginButton">Se connecter</button>
+                <li><button id="signupButton">Inscription</button></li>
+                <li><button id="loginButton">Se connecter</button></li>
                 <div id="categorieDropdown">
                     <ul>
                         <li>Action</li>
                         <li>Aventure</li>
-                        <li>Comédie</li>
                         <li>Drame</li>
                         <li>Chrono</li>
                         <!-- Ajoutez d'autres catégories ici -->
@@ -166,13 +469,22 @@ button[type="submit"] {
             </ul>
         </nav>
     </header>
+
+
  <main>
      
-    <section id="featured">
+     <section id="featured">
     <h2>En ce moment sur OldestStream</h2>
     <div class="featured-info">
         <span class="no-ads">Sans publicité</span>
         <span class="work-in-progress">Site en développement</span>
+    </div>
+    <div class="support-box">
+        <p>Soutenez FluxOldest en regardant une courte vidéo.</p>
+        <button class="play-btn" id="playAdBtn">Play</button>
+    </div>
+    <div id="adContainer" style="display: none;">
+        <!-- L'iframe de la publicité sera inséré ici -->
     </div>
     <div class="featured">
         <div class="video">
@@ -180,11 +492,95 @@ button[type="submit"] {
         </div>
         <!-- Ajoutez d'autres vidéos en vedette ici -->
     </div>
-</section>
- 
+    </section>
+
      
+
+<div class="carousel">
+  <div class="carousel-inner">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+    <!-- Ajoutez d'autres images ici -->
+  </div>
+</div>
+
+
+
      
-     <div id="videos"> <!-- Vidéo d'accueil --> <div id="welcomeVideo" class="categoryVideos"> <h2>Vidéo d'Accueil</h2> <div class="video-container"> <!-- Intégration de la vidéo d'accueil --> <iframe src="https://www.youtube.com/embed/tHnXVkEV-DY?si=oM_ESDqLQUmhBWTW" frameborder="0" allowfullscreen></iframe> <div class="overlay"> <button class="watch-button" data-category="welcome">Regarder</button> </div> </div> <p class="description">Description de la vidéo d'accueil</p> <div class="video-info"> <span class="views">500 vues</span> <span class="duration">3:45</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★☆</span> <span class="user-review">Avis : Excellente vidéo, très instructive.</span> </div> </div> <!-- Section Action --> <div id="actionVideos" class="categoryVideos"> <h2>Vidéos d'Action</h2> <div class="video-container"> <iframe src="https://www.youtube.com/embed/tHnXVkEV-DY?si=ayASRkrkk-dAMP3F" frameborder="0" allowfullscreen></iframe> <div class="overlay"> <button class="watch-button" data-category="action">Regarder</button> </div> </div> <p class="description">Description de la vidéo d'action</p> <div class="video-info"> <span class="views">1000 vues</span> <span class="duration">2:30</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★☆☆</span> <span class="user-review">Avis : Scènes d'action impressionnantes.</span> </div> </div> <!-- Section Aventure --> <div id="aventureVideos" class="categoryVideos"> <h2>Vidéos d'Aventure</h2> <div class="video-container"> <iframe src="https://www.youtube.com/embed/VIDEO_ID_AVENTURE" frameborder="0" allowfullscreen></iframe> <div class="overlay"> <button class="watch-button" data-category="aventure">Regarder</button> </div> </div> <p class="description">Description de la vidéo d'aventure</p> <div class="video-info"> <span class="views">750 vues</span> <span class="duration">4:15</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★☆</span> <span class="user-review">Avis : Une aventure palpitante du début à la fin.</span> </div> </div> <!-- Section Comédie --> <div id="comedyVideos" class="categoryVideos"> <h2>Vidéos de Comédie</h2> <div class="video-container"> <iframe src="https://www.youtube.com/embed/VIDEO_ID_COMEDIE" frameborder="0" allowfullscreen></iframe> <div class="overlay"> <button class="watch-button" data-category="comedie">Regarder</button> </div> </div> <p class="description">Description de la vidéo de comédie</p> <div class="video-info"> <span class="views">2500 vues</span> <span class="duration">1:45</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★★</span> <span class="user-review">Avis : Hilarante, j'ai ri aux larmes !</span> </div> </div> <!-- Section Drame --> <div id="drameVideos" class="categoryVideos"> <h2>Vidéos de Drame</h2> <div class="video-container"> <iframe src="https://www.youtube.com/embed/VIDEO_ID_DRAME" frameborder="0" allowfullscreen></iframe> <div class="overlay"> <button class="watch-button" data-category="drame">Regarder</button> </div> </div> <p class="description">Description de la vidéo de drame</p> <div class="video-info"> <span class="views">800 vues</span> <span class="duration">5:00</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★☆</span> <span class="user-review">Avis : Une histoire émouvante et touchante.</span> </div> </div> <!-- Section Chrono --> <div id="chronoVideos" class="categoryVideos"> <h2>Vidéos de Chrono</h2> <div class="video-container"> <iframe src="https://www.youtube.com/embed/VIDEO_ID_CHRONO" frameborder="0" allowfullscreen></iframe> <div class="overlay"> <button class="watch-button" data-category="chrono">Regarder</button> </div> </div> <p class="description">Description de la vidéo de chrono</p> <div class="video-info"> <span class="views">1200 vues</span> <span class="duration">3:10</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★☆☆</span> <span class="user-review">Avis : Intéressant, mais un peu confus par moments.</span> </div> </div> </div>
+     <div id="videos"> <!-- Vidéo d'accueil --> <div id="welcomeVideo" class="categoryVideos"> <h2>Vidéo d'Accueil</h2> <div class="video-container"> <!-- Intégration de la vidéo d'accueil --> 
+         <iframe 
+            width="395" 
+            height="260" 
+            frameborder="0" 
+            src="https://mega.nz/embed/eI1TQCpD#YqvYrfUQBbVi6hmdOo2xJKF1JPOm5tMypln9g7lk65o" 
+            allowfullscreen>
+        </iframe>
+        <!-- Bande noire avec description à l'intérieur de la vidéo -->
+        <div class="bande-noire">
+            <p>Godzilla vs Kong 2024</p>
+        </div>
+
+         
+         
+         <div class="overlay"> <button class="watch-button" data-category="welcome">Regarder</button> </div> </div> <p class="description">Description de la vidéo d'accueil</p> <div class="video-info"> <span class="views">500 vues</span> <span class="duration">3:45</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★☆</span> <span class="user-review">Avis : Excellente vidéo, très instructive.</span> </div> </div> <!-- Section Action --> <div id="actionVideos" class="categoryVideos"> <h2>Vidéos d'Action</h2> <div class="video-container"> 
+             
+             <iframe 
+            width="395" 
+            height="260" 
+            frameborder="0" 
+            src="https://mega.nz/embed/eI1TQCpD#YqvYrfUQBbVi6hmdOo2xJKF1JPOm5tMypln9g7lk65o" 
+            allowfullscreen>
+        </iframe>
+        <!-- Bande noire avec description à l'intérieur de la vidéo -->
+        <div class="bande-noire">
+            <p>Description de la vidéo ou autre contenu ici...</p>
+        </div>
+             
+             
+             <div class="overlay"> <button class="watch-button" data-category="action">Regarder</button> </div> </div> <p class="description">Description de la vidéo d'action</p> <div class="video-info"> <span class="views">1000 vues</span> <span class="duration">2:30</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★☆☆</span> <span class="user-review">Avis : Scènes d'action impressionnantes.</span> </div> </div> <!-- Section Aventure --> <div id="aventureVideos" class="categoryVideos"> <h2>Vidéos d'Aventure</h2> <div class="video-container"> <iframe 
+                     width="395" 
+                     height="260" 
+                     frameborder="0" 
+                     src="https://mega.nz/embed/eI1TQCpD#YqvYrfUQBbVi6hmdOo2xJKF1JPOm5tMypln9g7lk65o" 
+                     allowfullscreen>
+                 </iframe>
+                 <!-- Bande noire avec description à l'intérieur de la vidéo -->
+                 <div class="bande-noire">
+                     <p>Description de la vidéo ou autre contenu ici...</p>
+                 </div>
+                 <div class="overlay"> <button class="watch-button" data-category="aventure">Regarder</button> </div> </div> <p class="description">Description de la vidéo d'aventure</p> <div class="video-info"> <span class="views">750 vues</span> <span class="duration">4:15</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★☆</span> <span class="user-review">Avis : Une aventure palpitante du début à la fin.</span> </div> </div> <!-- Section Comédie --> <div id="comedyVideos" class="categoryVideos"> <h2>Vidéos de Comédie</h2> <div class="video-container"> <iframe 
+                         width="395" 
+                         height="260" 
+                         frameborder="0" 
+                         src="https://mega.nz/embed/eI1TQCpD#YqvYrfUQBbVi6hmdOo2xJKF1JPOm5tMypln9g7lk65o" 
+                         allowfullscreen>
+                     </iframe>
+                     <!-- Bande noire avec description à l'intérieur de la vidéo -->
+                     <div class="bande-noire">
+                         <p>Description de la vidéo ou autre contenu ici...</p>
+                     </div> <div class="overlay"> <button class="watch-button" data-category="comedie">Regarder</button> </div> </div> <p class="description">Description de la vidéo de comédie</p> <div class="video-info"> <span class="views">2500 vues</span> <span class="duration">1:45</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★★</span> <span class="user-review">Avis : Hilarante, j'ai ri aux larmes !</span> </div> </div> <!-- Section Drame --> <div id="drameVideos" class="categoryVideos"> <h2>Vidéos de Drame</h2> <div class="video-container"> <iframe 
+                             width="395" 
+                             height="260" 
+                             frameborder="0" 
+                             src="https://mega.nz/embed/eI1TQCpD#YqvYrfUQBbVi6hmdOo2xJKF1JPOm5tMypln9g7lk65o" 
+                             allowfullscreen>
+                         </iframe>
+                         <!-- Bande noire avec description à l'intérieur de la vidéo -->
+                         <div class="bande-noire">
+                             <p>Description de la vidéo ou autre contenu ici...</p>
+                         </div>
+                         <div class="overlay"> <button class="watch-button" data-category="drame">Regarder</button> </div> </div> <p class="description">Description de la vidéo de drame</p> <div class="video-info"> <span class="views">800 vues</span> <span class="duration">5:00</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★★☆</span> <span class="user-review">Avis : Une histoire émouvante et touchante.</span> </div> </div> <!-- Section Chrono --> <div id="chronoVideos" class="categoryVideos"> <h2>Vidéos de Chrono</h2> <div class="video-container"> <iframe 
+                                 width="395" 
+                                 height="260" 
+                                 frameborder="0" 
+                                 src="https://mega.nz/embed/eI1TQCpD#YqvYrfUQBbVi6hmdOo2xJKF1JPOm5tMypln9g7lk65o" 
+                                 allowfullscreen>
+                             </iframe>
+                             <!-- Bande noire avec description à l'intérieur de la vidéo -->
+                             <div class="bande-noire">
+                                 <p>Description de la vidéo ou autre contenu ici...</p>
+                             </div>
+                             <div class="overlay"> <button class="watch-button" data-category="chrono">Regarder</button> </div> </div> <p class="description">Description de la vidéo de chrono</p> <div class="video-info"> <span class="views">1200 vues</span> <span class="duration">3:10</span> </div> <div class="rating"> <span>Note : </span> <span class="stars">★★★☆☆</span> <span class="user-review">Avis : Intéressant, mais un peu confus par moments.</span> </div> </div> </div>
 
 
  <!-- Le reste du code reste inchangé --> <!-- ... --> 
@@ -233,222 +629,276 @@ button[type="submit"] {
         <!-- Ajoutez d'autres éléments de votre interface ici -->
 
     </main>
+        <!-- Contenu vidéo d'accueil et catégories -->
+        <!-- ... (Votre code existant pour les vidéos) ... -->
 
-    <div class="menu-icon" id="menuIcon">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <p>Pour regarder cette vidéo, veuillez vous inscrire.</p>
+                <div id="signupFormContainer">
+                    <h2>Inscription</h2>
+                    <form id="signupForm">
+                        <label for="signupEmail">Email:</label>
+                        <input type="email" id="signupEmail" required>
 
-    <div class="menu-bar" id="menuBar">
-        <div class="profile-info">
-            <!-- Affiche l'adresse email de l'utilisateur connecté -->
-            <p>Connecté en tant que <strong id="userEmail"></strong></p>
+                        <label for="signupPhoneNumber">Numéro de téléphone:</label>
+                        <input type="tel" id="signupPhoneNumber" required>
+
+                        <label for="signupPassword">Mot de passe:</label>
+                        <input type="password" id="signupPassword" required>
+
+                        <button type="submit">S'inscrire</button>
+                    </form>
+                    <p id="signupErrorMessage"></p>
+                    <p id="signupSuccessMessage"></p>
+                </div>
+
+                <div id="loginFormContainer" style="display: none;">
+                    <h2>Connexion</h2>
+                    <form id="loginForm">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required>
+
+                        <label for="loginPassword">Mot de passe:</label>
+                        <input type="password" id="loginPassword" required>
+
+                        <a href="#" id="forgotPasswordLink">Mot de passe oublié ?</a><br>
+
+                        <button type="submit">Se connecter</button>
+                    </form>
+                    <p id="loginErrorMessage"></p>
+                    <p id="loginSuccessMessage"></p>
+                </div>
+            </div>
         </div>
-        <div id="orderSummary">
-            <p>Abonnement Free: <span id="totalQuantity">7mois gratuite</span></p>
-            <p>Prix après offre: <span id="totalPrice">1€</span></p>
-            <button id="confirmOrderButton" class="profile-button-green">Obtenir l'offre</button>
-            <button id="logoutButton" class="profile-button">Déconnexion</button>
+
+        <div class="menu-icon" id="menuIcon">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-    </div>
+
+        <div class="menu-bar" id="menuBar">
+            <div class="profile-info">
+                <!-- Affiche l'adresse email de l'utilisateur connecté -->
+                <p>Connecté en tant que <strong id="userEmail"></strong></p>
+            </div>
+            <div id="orderSummary">
+                <p>Abonnement Free: <span id="totalQuantity">7 mois gratuit</span></p>
+                <p>Prix après offre: <span id="totalPrice">1€</span></p>
+                <button id="confirmOrderButton" class="profile-button">Obtenir l'offre</button>
+                <button id="logoutButton" class="profile-button">Déconnexion</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 FluxOldest. Tous droits réservés.</p>
+    </footer>
 
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-auth.js"></script>
     <script>
         const firebaseConfig = {
-            apiKey: "AIzaSyDAfHALKYfgeChGolqH_2dpJfSfqBCcyqA",
-            authDomain: "oldest-stream.firebaseapp.com",
-            projectId: "oldest-stream",
-            storageBucket: "oldest-stream.appspot.com",
-            messagingSenderId: "424078202553",
-            appId: "1:424078202553:web:f0d08229fe081f6705ad68",
-            measurementId: "G-WE9Q32LD1X"
+            apiKey: "Votre-API-Key",
+            authDomain: "Votre-Auth-Domain",
+            projectId: "Votre-Project-ID",
+            storageBucket: "Votre-Storage-Bucket",
+            messagingSenderId: "Votre-Messaging-Sender-ID",
+            appId: "Votre-App-ID",
+            measurementId: "Votre-Measurement-ID"
         };
 
-        const app = firebase.initializeApp(firebaseConfig);
-        const analytics = firebase.analytics();
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
         const auth = firebase.auth();
 
-        const signupButton = document.getElementById('signupButton');
-        const loginButton = document.getElementById('loginButton');
-        const accueilButton = document.getElementById('accueilButton');
-        const modal = document.getElementById('myModal');
-        const closeModal = document.querySelector('.close');
-        const signupFormContainer = document.getElementById('signupFormContainer');
-        const loginFormContainer = document.getElementById('loginFormContainer');
-        const menuIcon = document.getElementById('menuIcon');
-        const menuBar = document.getElementById('menuBar');
-        const userEmail = document.getElementById('userEmail');
-        const logoutButton = document.getElementById('logoutButton');
-        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
-
-        function showMenuBar() {
-            menuBar.style.display = 'block';
+        // Function to open the modal
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
         }
 
-        function logout() {
-            auth.signOut().then(() => {
-                localStorage.removeItem('userEmail'); // Supprime l'email du stockage local
-                window.location.reload(); // Recharge la page après la déconnexion
-            }).catch((error) => {
-                console.log(error.message);
-            });
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
         }
 
-        signupButton.addEventListener('click', () => {
-            modal.style.display = 'block';
-            signupFormContainer.style.display = 'block';
-            loginFormContainer.style.display = 'none';
+        // Event listeners for buttons
+        document.getElementById("signupButton").addEventListener("click", function() {
+            document.getElementById("signupFormContainer").style.display = "block";
+            document.getElementById("loginFormContainer").style.display = "none";
+            openModal();
         });
-        loginButton.addEventListener('click', () => {
-            modal.style.display = 'block';
-            signupFormContainer.style.display = 'none';
-            loginFormContainer.style.display = 'block';
+
+        document.getElementById("loginButton").addEventListener("click", function() {
+            document.getElementById("signupFormContainer").style.display = "none";
+            document.getElementById("loginFormContainer").style.display = "block";
+            openModal();
         });
-        accueilButton.addEventListener('click', () => {
-            window.location.reload(); // Recharge la page pour revenir au début
-        });
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
+
+        // Close the modal
+        document.getElementById("closeModal").addEventListener("click", closeModal);
+
+        // Close the modal when clicking outside of it
+        window.addEventListener("click", function(event) {
+            if (event.target == modal) {
+                closeModal();
             }
         });
-        document.getElementById('signupForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            const phoneNumber = document.getElementById('signupPhoneNumber').value;
 
+        // Function to switch to login form
+        document.getElementById("forgotPasswordLink").addEventListener("click", function() {
+            document.getElementById("signupFormContainer").style.display = "none";
+            document.getElementById("loginFormContainer").style.display = "block";
+        });
+
+        // Handle the signup form submission
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("signupEmail").value;
+            const phoneNumber = document.getElementById("signupPhoneNumber").value;
+            const password = document.getElementById("signupPassword").value;
+
+            // Sign up logic using Firebase
             auth.createUserWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    document.getElementById('signupSuccessMessage').innerText = 'Inscription réussie.';
-                    setTimeout(() => {
-                        modal.style.display = 'none'; // Ferme le modal après 2 secondes
-                        signupButton.style.display = 'none'; // Cache le bouton d'inscription
-                        loginButton.style.display = 'inline'; // Affiche le bouton Connexion
-                    }, 2000);
+                .then(userCredential => {
+                    document.getElementById("signupSuccessMessage").innerText = "Inscription réussie!";
                 })
-                .catch((error) => {
-                    document.getElementById('signupSuccessMessage').innerText = '';
-                    document.getElementById('signupErrorMessage').innerText = error.message;
+                .catch(error => {
+                    document.getElementById("signupErrorMessage").innerText = error.message;
                 });
         });
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
 
+        // Handle the login form submission
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("loginEmail").value;
+            const password = document.getElementById("loginPassword").value;
+
+            // Login logic using Firebase
             auth.signInWithEmailAndPassword(email, password)
-                .then((userCredential) => {
-                    document.getElementById('loginSuccessMessage').innerText = 'Connexion réussie.';
-                    document.getElementById('loginErrorMessage').innerText = '';
-                    showMenuBar(); // Affiche le menu après une connexion réussie
-                    userEmail.textContent = email; // Affiche l'adresse email de l'utilisateur connecté
-                    userEmail.style.color = "green"; // Met l'adresse email en vert
-
-                    function showMenuBar() {
-                        menuBar.style.display = 'block';
-                        window.location.reload(); // Rafraîchit la page
-                    }
-
-                    loginButton.style.display = 'none'; // Cache le bouton de connexion
-                    signupButton.style.display = 'none'; // Cache le bouton d'inscription
-                    logoutButton.style.display = 'inline'; // Affiche le bouton Déconnexion
-                    localStorage.setItem('userEmail', email); // Stocke l'email dans le stockage local
+                .then(userCredential => {
+                    document.getElementById("loginSuccessMessage").innerText = "Connexion réussie!";
                 })
-                .catch((error) => {
-                    document.getElementById('loginSuccessMessage').innerText = '';
-                    document.getElementById('loginErrorMessage').innerText = error.message;
+                .catch(error => {
+                    document.getElementById("loginErrorMessage").innerText = error.message;
                 });
         });
 
-        menuIcon.addEventListener('click', () => {
-            menuBar.style.display = (menuBar.style.display === 'block') ? 'none' : 'block';
-        });
-        logoutButton.addEventListener('click', logout);
 
-        // Récupère l'email depuis le stockage local et l'affiche dans le menu au chargement de la page
-        document.addEventListener('DOMContentLoaded', () => {
-            const storedEmail = localStorage.getItem('userEmail');
-            if (storedEmail) {
-                userEmail.textContent = storedEmail;
-                userEmail.style.color = "green";
-                loginButton.style.display = 'none';
-                signupButton.style.display = 'none';
-                logoutButton.style.display = 'inline';
-                showMenuBar();
-            }
-        });
 
-        forgotPasswordLink.addEventListener('click', () => {
-            const email = prompt("Veuillez entrer votre adresse e-mail pour réinitialiser votre mot de passe :");
-            if (email) {
-                auth.sendPasswordResetEmail(email)
-                    .then(() => {
-                        alert("Un email de réinitialisation de mot de passe a été envoyé à votre adresse e-mail.");
-                    })
-                    .catch((error) => {
-                        alert(error.message);
-                    });
-            }
-        });
-
-        document.getElementById("categorieBtn").addEventListener("click", function() {
-            var dropdown = document.getElementById("categorieDropdown");
-            if (dropdown.style.display === "block") {
-                dropdown.style.display = "none";
-            } else {
-                dropdown.style.display = "block";
-            }
-        });    
-
-        document.querySelectorAll("#categorieDropdown ul li").forEach(function(category) {
-            category.addEventListener("click", function() {
-                var categoryName = category.textContent;
-                document.querySelectorAll("#videos .categoryVideos").forEach(function(videoCategory) {
-                    videoCategory.style.display = "none";
-                    if (videoCategory.querySelector("h2").textContent.includes(categoryName)) {
-                        videoCategory.style.display = "block";
-                    }
-                });
-            });
-        });
-
-        // Gérer le clic sur le bouton "Regarder"
-        const watchButtons = document.querySelectorAll('.watch-button');
-        watchButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const user = firebase.auth().currentUser;
-                if (!user) {
-                    modal.style.display = 'block'; // Affiche la modal d'inscription si l'utilisateur n'est pas connecté
-                }
-            });
-        });
-                        
+        
     </script>
+
 
 
     <script>
-    // Identifie le menu après la connexion réussie
-function showMenuBar() {
-    menuBar.style.display = 'block';
-    
-    // Supprime les boutons "Regarder" une fois le menu affiché
+    // Fonction pour afficher le modal d'inscription
+    function showModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    // Fonction pour fermer le modal
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    // Attacher l'événement de clic pour tous les boutons "Regarder"
     document.querySelectorAll('.watch-button').forEach(button => {
-        button.style.display = 'none';
+        button.addEventListener('click', showModal);
     });
 
-    // Supprime complètement l'overlay de chaque vidéo une fois le menu affiché
-    document.querySelectorAll('.video-container').forEach(video => {
-        video.querySelector('.overlay').remove(); // Supprime l'élément overlay
+    // Attacher l'événement de clic pour le bouton de fermeture du modal
+    document.getElementById("closeModal").addEventListener('click', closeModal);
+
+    // Fermer le modal lorsque l'utilisateur clique en dehors de la modal
+    window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById("myModal")) {
+            closeModal();
+        }
     });
-}
     </script>
-      
+
+     <script>
+    // Cacher toutes les vidéos de catégories au chargement de la page
+    document.addEventListener('DOMContentLoaded', function () {
+        const categorySections = document.querySelectorAll('.categoryVideos');
+        categorySections.forEach(section => section.style.display = 'none');
+        
+        // Afficher seulement les vidéos d'accueil
+        document.getElementById('welcomeVideo').style.display = 'block';
+    });
+
+    // Gérer l'affichage du dropdown de catégories
+    const categorieBtn = document.getElementById('categorieBtn');
+    const categorieDropdown = document.getElementById('categorieDropdown');
+
+    categorieBtn.addEventListener('click', function() {
+        if (categorieDropdown.style.display === 'block') {
+            categorieDropdown.style.display = 'none';
+        } else {
+            categorieDropdown.style.display = 'block';
+        }
+    });
+
+    // Afficher les vidéos selon la catégorie sélectionnée
+    const categoryItems = categorieDropdown.querySelectorAll('li');
+    categoryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const category = this.textContent.toLowerCase();
+
+            // Cacher toutes les sections de vidéos
+            const sections = document.querySelectorAll('.categoryVideos');
+            sections.forEach(section => section.style.display = 'none');
+
+            // Afficher la section correspondant à la catégorie sélectionnée
+            const selectedSection = document.getElementById(category + 'Videos');
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+        });
+    });
+
+    // Gestion du bouton Accueil pour afficher les vidéos d'accueil
+    const accueilButton = document.getElementById('accueilButton');
+    accueilButton.addEventListener('click', function() {
+        // Cacher toutes les sections de vidéos
+        const sections = document.querySelectorAll('.categoryVideos');
+        sections.forEach(section => section.style.display = 'none');
+
+        // Afficher la section des vidéos d'accueil
+        document.getElementById('welcomeVideo').style.display = 'block';
+    });
+
+    // Gestion de l'inscription et de la connexion (si nécessaire)
+    // Ajoutez vos scripts d'inscription et de connexion ici
+</script>
+
+    
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var accueilButton = document.getElementById('accueilButton');
+        var closeModal = document.getElementById('closeModal');
+        var modal = document.getElementById('myModal');
+
+        accueilButton.addEventListener('click', function() {
+            modal.style.display = "block";
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        });
+    });
+    </script>
 </body>
-</html>
+                                                    </html>
