@@ -16,17 +16,35 @@
     }
 
     header {
-        background-color: #6200ea;
-        padding: 20px;
-        text-align: center;
-        color: white;
-    }
+    background-color: #6200ea;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
 
-    h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.5em;
-        margin: 0;
-    }
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    margin: 0;
+}
+
+.note {
+    background-color: rgba(255, 255, 255, 0.9); /* Couleur blanche avec opacité */
+    color: #333; /* Couleur du texte */
+    padding: 15px; /* Espacement interne */
+    border-radius: 10px; /* Coins arrondis */
+    font-weight: bold; /* Texte en gras */
+    font-size: 1.1em; /* Taille de la police */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre autour du bloc */
+    margin-top: 10px; /* Espace au-dessus */
+    transition: all 0.3s ease; /* Transition pour l'effet au survol */
+}
+
+.note:hover {
+    transform: scale(1.05); /* Légère augmentation de taille au survol */
+    background-color: rgba(255, 255, 255, 1); /* Plein blanc au survol */
+}
+
 
     h2 {
         font-family: 'Playfair Display', serif;
@@ -185,15 +203,10 @@
 </style>
 </head>
 <body>
-<header style="background-color: #6200ea; padding: 20px; text-align: center; color: white;">
-    <h1 style="font-size: 2.5em; margin: 0; font-family: 'Arial', sans-serif;">Brochettes Street Shop 🍢</h1>
-    <p style="font-size: 1.2em; margin: 10px 0; font-family: 'Arial', sans-serif;">Commandez vos brochettes et boissons fraîches!</p>
-    <p style="background-color: #ffffff; padding: 15px; border-radius: 10px; 
-              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
-              font-weight: bold; font-size: 1.1em; color: #333;">
-        <span style="color: #6200ea; font-weight: bold;">📝 Note :</span> Une fois que votre commande est confirmée, nous avons <strong>15 minutes de préparation</strong>. 
-        Merci de votre patience! ⏳
-    </p>
+<header>
+    <h1>Brochettes Street Shop 🍢</h1>
+    <p>Commandez vos brochettes et boissons fraîches!</p>
+    <p class="note">📝 Note : Une fois que votre commande est confirmée, nous avons 15 minutes de préparation. Si un retard dépasse 20 minutes, nous vous enverrons un message. Merci de votre patience! ⏳</p>
 </header>
     
     <main>
