@@ -294,13 +294,16 @@ h1 {
             <div class="total" id="total-price">Total: 0 €</div>
             <button id="finalize-order">Finaliser la commande</button>
 
-            <!-- Formulaire de livraison -->
-            <form class="delivery-form" id="delivery-form">
-                <input type="text" id="name" placeholder="Votre nom" required>
-                <input type="text" id="phone" placeholder="Votre numéro de téléphone" required>
-                <input type="text" id="address" placeholder="Votre adresse" required>
-                <button type="submit" id="confirm-order">Confirmer la commande</button>
-            </form>
+            
+<!-- Formulaire de livraison -->
+<form class="delivery-form" id="delivery-form" style="display: none;" action="https://formspree.io/f/mpwzznqo" method="POST">
+    <input type="hidden" name="products" id="products">
+    <input type="hidden" name="total" id="total">
+    <input type="text" id="name" name="name" placeholder="Votre nom" required>
+    <input type="text" id="phone" name="phone" placeholder="Votre numéro de téléphone" required>
+    <input type="text" id="address" name="address" placeholder="Votre adresse" required>
+    <button type="submit" id="confirm-order">Confirmer la commande</button>
+</form>
         </aside>
 
         <!-- Bouton flottant pour le panier -->
@@ -334,7 +337,8 @@ h1 {
         });
     </script>
     <script>
-  const cartItems = document.getElementById('cart-items');
+  
+        const cartItems = document.getElementById('cart-items');
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
 const cart = document.getElementById('cart');
 const totalPriceElement = document.getElementById('total-price');
@@ -439,6 +443,13 @@ finalizeOrderButton.addEventListener('click', () => {
         alert("Votre panier est vide !");
         return;
     }
+    
+    // Remplir les champs cachés du formulaire avec les informations du panier
+    document.getElementById('products').value = Array.from(cartItems.children)
+        .map(item => item.textContent.split(' - ')[0]).join(', '); // Produits ajoutés
+    document.getElementById('total').value = totalPrice.toFixed(2); // Total
+
+    // Afficher le formulaire de livraison
     deliveryForm.style.display = 'block'; // Afficher le formulaire de livraison
 });
 
