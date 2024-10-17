@@ -496,6 +496,38 @@ window.addEventListener('load', resetCartAndDelivery);
 cartToggleButton.addEventListener('click', () => {
     cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
 });
+
+
+
+
+
+    // Fonction pour réinitialiser le panier et le formulaire de livraison
+function resetCartAndDelivery() {
+    cartItems.innerHTML = ''; // Vider le panier
+    totalPrice = 0; // Réinitialiser le total
+    totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`; // Mettre à jour l'affichage du total
+    deliveryForm.reset(); // Réinitialiser le formulaire de livraison
+    deliveryForm.style.display = 'none'; // Cacher le formulaire de livraison
+}
+
+// Finaliser la commande
+finalizeOrderButton.addEventListener('click', () => {
+    if (totalPrice === 0) {
+        showModal("Votre panier est vide !");
+        return;
+    }
+
+    // Remplir les champs cachés du formulaire avec les informations du panier
+    document.getElementById('products').value = Array.from(cartItems.children)
+        .map(item => item.textContent.split(' - ')[0]).join(', '); // Produits ajoutés
+    document.getElementById('total').value = totalPrice.toFixed(2); // Total
+
+    // Afficher le formulaire de livraison
+    deliveryForm.style.display = 'block'; // Afficher le formulaire de livraison
+
+    // Réinitialiser le panier et le formulaire de livraison après soumission
+    resetCartAndDelivery(); // Ajoutez cette ligne ici
+});
     </script>
 </body>
 </html>
