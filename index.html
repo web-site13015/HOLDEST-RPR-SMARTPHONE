@@ -478,9 +478,6 @@ finalizeOrderButton.addEventListener('click', () => {
 
     // Afficher le formulaire de livraison
     deliveryForm.style.display = 'block'; // Afficher le formulaire de livraison
-
-    // Réinitialiser le panier et le formulaire de livraison après la confirmation
-    resetCartAndDelivery();
 });
 
 // Fonction pour réinitialiser le panier et le formulaire de livraison
@@ -491,6 +488,9 @@ function resetCartAndDelivery() {
     deliveryForm.reset(); // Réinitialiser le formulaire de livraison
     deliveryForm.style.display = 'none'; // Cacher le formulaire de livraison
 }
+
+// Réinitialiser le panier et le formulaire de livraison lorsque l'utilisateur revient à la page d'accueil
+window.addEventListener('load', resetCartAndDelivery);
 
 // Afficher le panier lorsque le bouton est cliqué
 cartToggleButton.addEventListener('click', () => {
