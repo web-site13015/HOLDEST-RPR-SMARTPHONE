@@ -164,7 +164,7 @@
         }
 
         .product {
-            width: 90%;
+            width: 80%;
         }
     }
 
@@ -220,10 +220,13 @@
                     <option value="Crevettes">Brochette de Crevettes 🦐</option>
                 </select>
                 <label for="brochette-option">Choisissez un supplément :</label>
-                <select id="brochette-option">
-                    <option value="0">Aucun</option>
-                    <option value="2.50">Riz 🍚 (+2,50 €)</option>
-                </select>
+<select id="brochette-option">
+    <option value="0">Aucun</option>
+    <option value="2.50">Riz 🍚 (+2,50 €)</option>
+    <option value="2.50">Frites 🍟 (+2,50 €)</option>
+    <option value="2.50">Manioc 🍠 (+2,50 €)</option>
+    <option value="2.50">Banane 🍌 (+2,50 €)</option>
+</select>
 
                 <label for="brochette-canette">Ajoutez une boisson pour 1 € :</label>
                 <select id="brochette-canette">
@@ -247,6 +250,11 @@
                     <option value="2">Coca 🥤</option>
                     <option value="2">Sprite 🥤</option>
                     <option value="2">Fanta 🥤</option>
+                </select>
+                <label for="drink-option">Ajoutez un supplément :</label>
+                <select id="drink-option">
+                    <option value="0">Aucun</option>
+                    <option value="0.50">Glaçons 🧊 (+0,50 €)</option>
                 </select>
                 <button class="add-to-cart" data-product="Boisson" data-price="2" data-quantity="1" id="add-drink">Ajouter au Panier</button>
             </div>
@@ -272,110 +280,118 @@
     </main>
 
     <script>
-        const cartItems = document.getElementById('cart-items');
-        const addToCartButtons = document.querySelectorAll('.add-to-cart');
-        const cart = document.getElementById('cart');
-        const totalPriceElement = document.getElementById('total-price');
-        const finalizeOrderButton = document.getElementById('finalize-order');
-        const deliveryForm = document.getElementById('delivery-form');
-        const cartToggleButton = document.getElementById('cart-toggle');
-        let totalPrice = 0;
+  const cartItems = document.getElementById('cart-items');
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+const cart = document.getElementById('cart');
+const totalPriceElement = document.getElementById('total-price');
+const finalizeOrderButton = document.getElementById('finalize-order');
+const deliveryForm = document.getElementById('delivery-form');
+const cartToggleButton = document.getElementById('cart-toggle');
+let totalPrice = 0;
 
-        // Ajout des articles au panier
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const productName = button.getAttribute('data-product');
-                let productPrice = parseFloat(button.getAttribute('data-price'));
-                const productQuantity = parseInt(button.getAttribute('data-quantity'));
+// Désactiver la sélection de la canette au départ
+const brochetteCanette = document.getElementById('brochette-canette');
+brochetteCanette.disabled = true;
 
-                // Suppléments pour Samoussa
-                const samoussaOption = document.getElementById('samoussa-option').value;
-                if (productName === "Samoussa" && samoussaOption != "0") {
-                    productPrice += 2; // Ajout du supplément
-                }
+// Fonction pour vérifier la sélection du menu et du supplément
+function checkMenuAndSupplement() {
+    const selectedBrochette = document.getElementById('brochette-type').value;
+    const selectedSupplement = document.getElementById('brochette-option').value;
 
-                // Suppléments pour Brochette
-                const brochetteType = document.getElementById('brochette-type').value;
-                const brochetteOption = document.getElementById('brochette-option').value;
-                const brochetteCanette = document.getElementById('brochette-canette').value;
-                if (productName === "Brochette") {
-                    if (brochetteType === "") {
-                        alert("Veuillez choisir un type de brochette !");
-                        return; // Ne pas ajouter si aucun type n'est sélectionné
-                    }
-                    productPrice += parseFloat(brochetteOption); // Ajout du supplément pour la brochette
+    // Activer la canette seulement si un menu et un supplément sont choisis
+    if (selectedBrochette !== "" && selectedSupplement !== "0") {
+        brochetteCanette.disabled = false;
+    } else {
+        brochetteCanette.disabled = true;
+        brochetteCanette.value = "0";  // Réinitialiser la sélection de la canette si désactivée
+    }
+}
 
-                    // Ajouter la canette à 1 € si sélectionnée
-                    if (brochetteCanette != "0") {
-                        productPrice += parseFloat(brochetteCanette);
-                    }
-                }
+// Événements pour vérifier la sélection de menu et de supplément
+document.getElementById('brochette-type').addEventListener('change', checkMenuAndSupplement);
+document.getElementById('brochette-option').addEventListener('change', checkMenuAndSupplement);
 
-                // Créer un nouvel élément dans le panier
-                const cartItem = document.createElement('div');
-                cartItem.classList.add('cart-item');
-                cartItem.innerHTML = `
-                    <span>${productQuantity}x ${productName} - ${productPrice.toFixed(2)} €</span>
-                    <button class="remove-from-cart">❌</button>
-                `;
-                cartItems.appendChild(cartItem);
+// Ajout des articles au panier
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const productName = button.getAttribute('data-product');
+        let productPrice = parseFloat(button.getAttribute('data-price'));
+        const productQuantity = parseInt(button.getAttribute('data-quantity'));
 
-                // Mettre à jour le prix total
-                totalPrice += productPrice * productQuantity;
-                totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
+        // Suppléments pour Samoussa
+        const samoussaOption = document.getElementById('samoussa-option').value;
+        if (productName === "Samoussa" && samoussaOption != "0") {
+            productPrice += parseFloat(samoussaOption); // Ajout du supplément
+        }
 
-                // Afficher le panier
-                cart.style.display = 'block';
-            });
-        });
+        // Suppléments pour Brochette
+        const brochetteType = document.getElementById('brochette-type').value;
+        const brochetteOption = document.getElementById('brochette-option').value;
+        const brochetteCanetteValue = brochetteCanette.value;
 
-        // Gestion de la suppression d'un article du panier
-        cartItems.addEventListener('click', (event) => {
-            if (event.target.classList.contains('remove-from-cart')) {
-                const cartItem = event.target.parentElement;
-                const itemText = cartItem.querySelector('span').textContent;
-                const itemPrice = parseFloat(itemText.split('- ')[1].replace(' €', ''));
-
-                // Mettre à jour le prix total
-                totalPrice -= itemPrice;
-                totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
-
-                // Supprimer l'élément du panier
-                cartItems.removeChild(cartItem);
-                
-           // Cacher le panier si vide
-                if (cartItems.children.length === 0) {
-                    cart.style.display = 'none';
-                }
+        if (productName === "Brochette") {
+            if (brochetteType === "") {
+                alert("Veuillez choisir un type de brochette !");
+                return; // Ne pas ajouter si aucun type n'est sélectionné
             }
-        });
+            productPrice += parseFloat(brochetteOption); // Ajout du supplément pour la brochette
 
-        // Affichage/masquage du panier
-        cartToggleButton.addEventListener('click', () => {
-            cart.style.display = cart.style.display === 'block' ? 'none' : 'block';
-        });
+            // Ajouter la canette à 1 € si sélectionnée
+            if (brochetteCanetteValue !== "0") {
+                productPrice += parseFloat(brochetteCanetteValue);
+            }
+        }
 
-        // Finalisation de la commande
-        finalizeOrderButton.addEventListener('click', () => {
-            deliveryForm.style.display = deliveryForm.style.display === 'block' ? 'none' : 'block';
-        });
+        // Suppléments pour Boissons (indépendamment de la canette pour Brochette)
+        const drinkOption = document.getElementById('drink-option').value;
+        if (productName === "Boisson" && drinkOption != "0") {
+            productPrice += parseFloat(drinkOption); // Ajout du supplément
+        }
 
-        // Gestion de la soumission du formulaire de livraison
-        deliveryForm.addEventListener('submit', (event) => {
-            event.preventDefault(); // Empêcher le rechargement de la page
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
+        // Créer un nouvel élément dans le panier
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <span>${productQuantity}x ${productName} - ${productPrice.toFixed(2)} €</span>
+            <button class="remove-from-cart">❌</button>
+        `;
+        cartItems.appendChild(cartItem);
 
-            alert(`Commande confirmée!\nNom: ${name}\nTéléphone: ${phone}\nAdresse: ${address}\nTotal: ${totalPrice.toFixed(2)} €`);
+        // Mettre à jour le prix total
+        totalPrice += productPrice * productQuantity;
+        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
 
-            // Réinitialisation du panier et du formulaire
-            cartItems.innerHTML = '';
-            totalPrice = 0;
-            totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
-            deliveryForm.reset();
-            cart.style.display = 'none';
-        });
+        // Afficher le panier
+        cart.style.display = 'block';
+    });
+});
+
+// Gestion de la suppression d'un article du panier
+cartItems.addEventListener('click', (event) => {
+    if (event.target.classList.contains('remove-from-cart')) {
+        const cartItem = event.target.parentElement;
+        const priceText = cartItem.textContent.split(' - ')[1];
+        const itemPrice = parseFloat(priceText.replace(' €', ''));
+        
+        totalPrice -= itemPrice; // Soustraire le prix de l'article retiré
+        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
+        cartItem.remove(); // Retirer l'élément du DOM
+    }
+});
+
+// Finaliser la commande
+finalizeOrderButton.addEventListener('click', () => {
+    if (totalPrice === 0) {
+        alert("Votre panier est vide !");
+        return;
+    }
+    deliveryForm.style.display = 'block'; // Afficher le formulaire de livraison
+});
+
+// Afficher le panier lorsque le bouton est cliqué
+cartToggleButton.addEventListener('click', () => {
+    cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
+});
     </script>
 </body>
-                                                                 </html>
+    </html>
