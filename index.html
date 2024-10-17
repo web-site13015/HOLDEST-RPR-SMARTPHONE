@@ -200,6 +200,14 @@ h1 {
         border-radius: 5px;
         border: 1px solid #ddd;
     }
+
+
+                  #about-content {
+            font-size: 14px;
+        }  
+        .a2a_button_snapchat {
+            background-color: yellow;
+        }
 </style>
 </head>
 <body>
@@ -298,7 +306,33 @@ h1 {
         <!-- Bouton flottant pour le panier -->
         <div class="cart-toggle" id="cart-toggle">🛒</div>
     </main>
+ <div id="social-sharing">
+        <div id="social-sharing" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" style="left:0px; top:150px;">
+            <a class="a2a_button_snapchat" href="https://web-site13015.github.io/brochette_street_shop/"></a>
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_twitter"></a>
+            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+        </div>
+    </div>
 
+    <script async src="https://static.addtoany.com/menu/page.js"></script>
+
+    <script>
+        var socialSharing = document.getElementById('social-sharing');
+        var lastScrollTop = 0;
+
+        window.addEventListener('scroll', function() {
+            var st = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (st > lastScrollTop) {
+                socialSharing.style.display = 'none'; // Masquer le code en descendant
+            } else {
+                socialSharing.style.display = 'block'; // Afficher le code en montant
+            }
+
+            lastScrollTop = st;
+        });
+    </script>
     <script>
   const cartItems = document.getElementById('cart-items');
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
