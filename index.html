@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-       <meta property="og:image" content="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/0d1ed53c-2e60-62b1-b3d3-f1753ef88b08.jpg" />
+<meta property="og:image" content="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/0d1ed53c-2e60-62b1-b3d3-f1753ef88b08.jpg" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brochettes Street Shop</title>
@@ -15,7 +15,8 @@
         padding: 0;
     }
 
-    header {
+ 
+header {
     background-color: #6200ea;
     padding: 20px;
     text-align: center;
@@ -44,7 +45,6 @@ h1 {
     transform: scale(1.05); /* Légère augmentation de taille au survol */
     background-color: rgba(255, 255, 255, 1); /* Plein blanc au survol */
 }
-
 
     h2 {
         font-family: 'Playfair Display', serif;
@@ -200,23 +200,19 @@ h1 {
         border-radius: 5px;
         border: 1px solid #ddd;
     }
-
-
-                  #about-content {
+    
+                      #about-content {
             font-size: 14px;
         }  
         .a2a_button_snapchat {
             background-color: yellow;
         }
-
-
-
-
-
-       
 </style>
 </head>
 <body>
+
+
+
 <header>
     <h1>Brochettes Street Shop 🍢</h1>
     <p>Commandez vos brochettes et boissons fraîches!</p>
@@ -300,7 +296,7 @@ h1 {
             <div class="total" id="total-price">Total: 0 €</div>
             <button id="finalize-order">Finaliser la commande</button>
 
-            
+   
 <!-- Formulaire de livraison -->
 <form class="delivery-form" id="delivery-form" style="display: none;" action="https://formspree.io/f/mpwzznqo" method="POST">
     <input type="hidden" name="products" id="products">
@@ -315,14 +311,14 @@ h1 {
         <!-- Bouton flottant pour le panier -->
         <div class="cart-toggle" id="cart-toggle">🛒</div>
     </main>
-
 <div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
     <div style="background-color:white; padding:20px; border-radius:5px; text-align:center;">
         <p id="modal-message"></p>
         <button id="close-modal">Fermer</button>
     </div>
 </div>
-       
+
+
  <div id="social-sharing">
         <div id="social-sharing" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" style="left:0px; top:150px;">
             <a class="a2a_button_snapchat" href="https://web-site13015.github.io/brochette_street_shop/"></a>
@@ -351,9 +347,7 @@ h1 {
         });
     </script>
     <script>
-  
-        
-        const cartItems = document.getElementById('cart-items');
+  const cartItems = document.getElementById('cart-items');
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
 const cart = document.getElementById('cart');
 const totalPriceElement = document.getElementById('total-price');
@@ -489,7 +483,6 @@ finalizeOrderButton.addEventListener('click', () => {
 cartToggleButton.addEventListener('click', () => {
     cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
 });
-         
     </script>
 </body>
-    </html>
+</html>
