@@ -348,14 +348,13 @@ h1 {
     </script>
     <script>
   
-        const cartItems = document.getElementById('cart-items');
+const cartItems = document.getElementById('cart-items');
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
 const cart = document.getElementById('cart');
 const totalPriceElement = document.getElementById('total-price');
 const finalizeOrderButton = document.getElementById('finalize-order');
 const deliveryForm = document.getElementById('delivery-form');
 const cartToggleButton = document.getElementById('cart-toggle');
-const refreshCartButton = document.getElementById('refresh-cart'); // Bouton pour rafraîchir le panier
 let totalPrice = 0;
 
 // Désactiver la sélection de la canette au départ
@@ -395,25 +394,6 @@ function checkMenuAndSupplement() {
 // Événements pour vérifier la sélection de menu et de supplément
 document.getElementById('brochette-type').addEventListener('change', checkMenuAndSupplement);
 document.getElementById('brochette-option').addEventListener('change', checkMenuAndSupplement);
-
-// Fonction pour charger l'état du panier depuis sessionStorage
-function loadCart() {
-    const savedCart = JSON.parse(sessionStorage.getItem('cart'));
-    if (savedCart) {
-        savedCart.forEach(item => {
-            const cartItem = document.createElement('div');
-            cartItem.classList.add('cart-item');
-            cartItem.innerHTML = `
-                <span>${item.quantity}x ${item.name} - ${item.price.toFixed(2)} €</span>
-                <button class="remove-from-cart">❌</button>
-            `;
-            cartItems.appendChild(cartItem);
-            totalPrice += item.price * item.quantity;
-        });
-        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
-        cart.style.display = 'block';
-    }
-}
 
 // Ajout des articles au panier
 addToCartButtons.forEach(button => {
@@ -462,11 +442,6 @@ addToCartButtons.forEach(button => {
         `;
         cartItems.appendChild(cartItem);
 
-        // Sauvegarder l'état du panier dans sessionStorage
-        const cartData = JSON.parse(sessionStorage.getItem('cart')) || [];
-        cartData.push({ name: productName, price: productPrice, quantity: productQuantity });
-        sessionStorage.setItem('cart', JSON.stringify(cartData));
-
         // Mettre à jour le prix total
         totalPrice += productPrice * productQuantity;
         totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
@@ -486,32 +461,7 @@ cartItems.addEventListener('click', (event) => {
         totalPrice -= itemPrice; // Soustraire le prix de l'article retiré
         totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
         cartItem.remove(); // Retirer l'élément du DOM
-
-        // Mettre à jour sessionStorage
-        const updatedCartData = Array.from(cartItems.children).map(item => {
-            const itemText = item.textContent.split(' - ')[0].split('x');
-            const quantity = parseInt(itemText[0]);
-            const name = itemText[1].trim();
-            const price = parseFloat(itemText[1].split(' - ')[1].replace(' €', ''));
-            return { name: name, price: price, quantity: quantity };
-        });
-        sessionStorage.setItem('cart', JSON.stringify(updatedCartData));
     }
-});
-
-// Rafraîchir le panier et le formulaire de livraison
-refreshCartButton.addEventListener('click', () => {
-    // Vider le contenu du panier
-    cartItems.innerHTML = '';
-    totalPrice = 0;
-    totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
-
-    // Réinitialiser le formulaire de livraison
-    deliveryForm.reset();
-    deliveryForm.style.display = 'none'; // Cacher le formulaire après le rafraîchissement
-
-    // Effacer le sessionStorage
-    sessionStorage.removeItem('cart');
 });
 
 // Finaliser la commande
@@ -529,12 +479,23 @@ finalizeOrderButton.addEventListener('click', () => {
     // Afficher le formulaire de livraison
     deliveryForm.style.display = 'block'; // Afficher le formulaire de livraison
 
-    // Effacer le sessionStorage après finalisation
-    sessionStorage.removeItem('cart');
+    // Réinitialiser le panier et le formulaire de livraison après la confirmation
+    resetCartAndDelivery();
 });
 
-// Charger l'état du panier à l'initialisation
-loadCart();
+// Fonction pour réinitialiser le panier et le formulaire de livraison
+function resetCartAndDelivery() {
+    cartItems.innerHTML = ''; // Vider le panier
+    totalPrice = 0; // Réinitialiser le total
+    totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`; // Mettre à jour l'affichage du total
+    deliveryForm.reset(); // Réinitialiser le formulaire de livraison
+    deliveryForm.style.display = 'none'; // Cacher le formulaire de livraison
+}
+
+// Afficher le panier lorsque le bouton est cliqué
+cartToggleButton.addEventListener('click', () => {
+    cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
+});
     </script>
 </body>
 </html>
