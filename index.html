@@ -486,7 +486,20 @@ cartToggleButton.addEventListener('click', () => {
 
 
 
+// Sélectionner le bouton de confirmation de commande
+document.getElementById('confirm-order').addEventListener('click', function() {
+    // Réinitialiser le formulaire de livraison
+    document.getElementById('delivery-form').reset();
 
+    // Vider le panier
+    document.getElementById('cart-items').innerHTML = '';
+
+    // Supprimer le panier du localStorage si tu y stockes les articles
+    localStorage.removeItem('cart');
+
+    // Supprimer les informations du formulaire du localStorage si tu y stockes des données
+    localStorage.removeItem('formData');
+});
     </script>
 </body>
     </html>
