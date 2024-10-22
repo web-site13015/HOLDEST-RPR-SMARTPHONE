@@ -207,375 +207,79 @@ h1 {
         .a2a_button_snapchat {
             background-color: yellow;
         }
-</style>
-</head>
-<body>
-
-
-
-<header>
-    <h1>Brochettes Street Shop 🍢</h1>
-    <p>Commandez vos brochettes et boissons fraîches!</p>
-    <p class="note">📝 Note : Une fois que votre commande est confirmée, nous avons 15 minutes de préparation. Si un retard dépasse 20 minutes, nous vous enverrons un message. Merci de votre patience! ⏳</p>
-</header>
-    
-    <main>
-        <section class="products">
-            <!-- Samoussa -->
-            <div class="product">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" />
-                <h2>Samoussa 🥟</h2>
-                <p>5,50 € les 6 pièces</p>
-                <label for="samoussa-option">Choisissez un supplément :</label>
-                <select id="samoussa-option">
-                    <option value="0">Aucun</option>
-                    <option value="2">Supplément Manioc 🍠 (+2 €)</option>
-                    <option value="2">Supplément Banane 🍌 (+2 €)</option>
-                    <option value="2">Salade Papaye 🥗 (+2 €)</option>
-                    <option value="2">Salade Mangue 🥭 (+2 €)</option>
-                </select>
-                <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
-            </div>
-
-            <!-- Brochette -->
-            <div class="product">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" alt="Brochette de Poulet" />
-                <h2>Brochette 🍢</h2>
-                <p>Menu à 6,50 €</p>
-                <label for="brochette-type">Type de brochette :</label>
-                <select id="brochette-type">
-                    <option value="">Choisissez...</option>
-                    <option value="Poulet">Brochette de Poulet 🍗</option>
-                    <option value="Viande">Brochette de Viande Halal 🥩</option>
-                    <option value="Crevettes">Brochette de Crevettes 🦐</option>
-                </select>
-                <label for="brochette-option">Choisissez un supplément :</label>
-<select id="brochette-option">
-    <option value="0">Aucun</option>
-    <option value="2.50">Riz 🍚 (+2,50 €)</option>
-    <option value="2.50">Frites 🍟 (+2,50 €)</option>
-    <option value="2.50">Manioc 🍠 (+2,50 €)</option>
-    <option value="2.50">Banane 🍌 (+2,50 €)</option>
-</select>
-
-                <label for="brochette-canette">Ajoutez une boisson pour 1 € :</label>
-                <select id="brochette-canette">
-                    <option value="0">Aucune</option>
-                    <option value="1">Coca 🥤 (+1 €)</option>
-                    <option value="1">Sprite 🥤 (+1 €)</option>
-                    <option value="1">Fanta 🥤 (+1 €)</option>
-                </select>
-
-                <button class="add-to-cart" data-product="Brochette" data-price="6.50" data-quantity="1" id="add-brochette">Ajouter au Panier</button>
-            </div>
-
-            <!-- Boissons -->
-            <div class="product">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" alt="Boissons Canette" />
-                <h2>Boissons Canette 🥤</h2>
-                <p>Choisissez parmi notre sélection de boissons à 2 €.</p>
-                <label for="drink-select">Choisissez une boisson :</label>
-                <select id="drink-select">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="2">Coca 🥤</option>
-                    <option value="2">Sprite 🥤</option>
-                    <option value="2">Fanta 🥤</option>
-                </select>
-                <label for="drink-option">Ajoutez un supplément :</label>
-                <select id="drink-option">
-                    <option value="0">Aucun</option>
-                    <option value="0.50">Glaçons 🧊 (+0,50 €)</option>
-                </select>
-                <button class="add-to-cart" data-product="Boisson" data-price="2" data-quantity="1" id="add-drink">Ajouter au Panier</button>
-            </div>
-        </section>
         
-        <aside class="cart" id="cart">
-            <h2>Panier 🛒</h2>
-            <div class="cart-items" id="cart-items"></div>
-            <div class="total" id="total-price">Total: 0 €</div>
-            <button id="finalize-order">Finaliser la commande</button>
-
-   
-<!-- Formulaire de livraison -->
-<form class="delivery-form" id="delivery-form" style="display: none;" action="https://formspree.io/f/mpwzznqo" method="POST">
-    <input type="hidden" name="products" id="products">
-    <input type="hidden" name="total" id="total">
-    <input type="text" id="name" name="name" placeholder="Votre nom" required>
-    <input type="text" id="phone" name="phone" placeholder="Votre numéro de téléphone" required>
-    <input type="text" id="address" name="address" placeholder="Votre adresse" required>
-    <button type="submit" id="confirm-order">Confirmer la commande</button>
-</form>
-        </aside>
-
-        <!-- Bouton flottant pour le panier -->
-        <div class="cart-toggle" id="cart-toggle">🛒</div>
-    </main>
-<div id="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
-    <div style="background-color:white; padding:20px; border-radius:5px; text-align:center;">
-        <p id="modal-message"></p>
-        <button id="close-modal">Fermer</button>
-    </div>
-</div>
 
 
- <div id="social-sharing">
-        <div id="social-sharing" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" style="left:0px; top:150px;">
-            <a class="a2a_button_snapchat" href="https://web-site13015.github.io/brochette_street_shop/"></a>
-            <a class="a2a_button_facebook"></a>
-            <a class="a2a_button_twitter"></a>
-            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-        </div>
-    </div>
 
-    <script async src="https://static.addtoany.com/menu/page.js"></script>
 
-    <script>
-        var socialSharing = document.getElementById('social-sharing');
-        var lastScrollTop = 0;
-
-        window.addEventListener('scroll', function() {
-            var st = window.pageYOffset || document.documentElement.scrollTop;
-
-            if (st > lastScrollTop) {
-                socialSharing.style.display = 'none'; // Masquer le code en descendant
-            } else {
-                socialSharing.style.display = 'block'; // Afficher le code en montant
-            }
-
-            lastScrollTop = st;
-        });
-    </script>
-    <script>
-  const cartItems = document.getElementById('cart-items');
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
-const cart = document.getElementById('cart');
-const totalPriceElement = document.getElementById('total-price');
-const finalizeOrderButton = document.getElementById('finalize-order');
-const deliveryForm = document.getElementById('delivery-form');
-const cartToggleButton = document.getElementById('cart-toggle');
-let totalPrice = 0;
-
-// Désactiver la sélection de la canette au départ
-const brochetteCanette = document.getElementById('brochette-canette');
-brochetteCanette.disabled = true;
-
-// Modale pour afficher les messages d'erreur
-const modal = document.getElementById('modal');
-const modalMessage = document.getElementById('modal-message');
-const closeModalButton = document.getElementById('close-modal');
-
-// Fonction pour afficher la modale
-function showModal(message) {
-    modalMessage.textConten<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta property="og:image" content="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/0d1ed53c-2e60-62b1-b3d3-f1753ef88b08.jpg" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brochettes Street Shop</title>
-
-<style>
-    body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: #f4f4f4;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
-
- 
-header {
-    background-color: #6200ea;
+/* Styles de la section des produits exclusifs */
+.exclusive-products {
+    background-color: #f9f9f9; /* Couleur de fond pour la section */
     padding: 20px;
-    text-align: center;
-    color: white;
+    border-radius: 8px; /* Coins arrondis */
+    margin-top: 20px; /* Espace au-dessus de la section */
+    text-align: center; /* Centre le texte */
 }
 
-h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5em;
-    margin: 0;
+
+/* Titre avec animation */
+.exclusive-products h2 {
+    font-size: 2em; /* Taille de police du titre */
+    color: #ff6600; /* Couleur du titre */
+    margin-bottom: 20px; /* Marge en dessous du titre */
+    animation: colorChange 3s infinite; /* Animation de couleur */
 }
 
-.note {
-    background-color: rgba(255, 255, 255, 0.9); /* Couleur blanche avec opacité */
+/* Animation de changement de couleur */
+@keyframes colorChange {
+    0% { color: #ff6600; }
+    50% { color: #ffcc00; }
+    100% { color: #ff6600; }
+}
+
+
+
+/* Effet de survol sur les produits */
+.product:hover {
+    transform: translateY(-5px); /* Élève le produit légèrement au survol */
+}
+
+/* Styles pour les images des produits */
+.product img {
+    width: 100%; /* Prend toute la largeur de la div */
+    height: auto; /* Garde les proportions */
+    border-radius: 5px; /* Coins arrondis pour l'image */
+}
+
+/* Styles des titres et des prix */
+.product h2 {
+    font-size: 1.5em; /* Taille de police pour le nom du produit */
     color: #333; /* Couleur du texte */
-    padding: 15px; /* Espacement interne */
-    border-radius: 10px; /* Coins arrondis */
-    font-weight: bold; /* Texte en gras */
-    font-size: 1.1em; /* Taille de la police */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombre autour du bloc */
-    margin-top: 10px; /* Espace au-dessus */
-    transition: all 0.3s ease; /* Transition pour l'effet au survol */
+    margin: 10px 0; /* Marges autour du titre */
 }
 
-.note:hover {
-    transform: scale(1.05); /* Légère augmentation de taille au survol */
-    background-color: rgba(255, 255, 255, 1); /* Plein blanc au survol */
+.product p {
+    font-size: 1.2em; /* Taille de police pour le prix */
+    color: #e67e22; /* Couleur du prix */
+    margin: 10px 0; /* Marges autour du prix */
 }
 
-    h2 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.5em;
-        margin-bottom: 15px;
-    }
+/* Styles pour le bouton "Ajouter au Panier" */
+.product button {
+    background-color: #2ecc71; /* Couleur de fond du bouton */
+    color: white; /* Couleur du texte du bouton */
+    border: none; /* Pas de bordure */
+    padding: 10px 20px; /* Espacement intérieur */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Curseur en forme de main au survol */
+    transition: background-color 0.3s; /* Transition pour la couleur de fond */
+}
 
-    p, button, select, input {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1em;
-    }
+/* Effet de survol sur le bouton */
+.product button:hover {
+    background-color: #27ae60; /* Couleur de fond au survol */
+}
 
-    .products {
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        padding: 20px;
-        gap: 20px; /* Espacement entre les produits */
-    }
-
-    .product {
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        width: 280px;
-        text-align: left;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        margin: 10px;
-        transition: transform 0.3s;
-    }
-
-    .product:hover {
-        transform: translateY(-5px);
-    }
-
-    .product img {
-        max-width: 100%;
-        border-radius: 10px;
-        margin-bottom: 15px;
-    }
-
-    /* Description du produit */
-    .product p {
-        font-size: 1.1em;
-        margin-bottom: 15px;
-        color: #555;
-    }
-
-    /* Sélecteurs d'options */
-    .product label {
-        font-weight: bold;
-        display: block;
-        margin-bottom: 5px;
-    }
-
-    .product select, .product input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        background-color: #f9f9f9;
-    }
-
-    /* Boutons */
-    button {
-        background-color: #6200ea;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s;
-        width: 100%; /* Prend toute la largeur */
-        font-size: 1.1em;
-    }
-
-    button:hover {
-        background-color: #3700b3;
-    }
-
-    /* Panier */
-    .cart {
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        width: 300px;
-        position: fixed;
-        right: 20px;
-        top: 100px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        display: none; /* Cacher le panier par défaut */
-        z-index: 1000;
-    }
-
-    .cart h2 {
-        margin: 0 0 10px;
-    }
-
-    .cart-items {
-        max-height: 200px;
-        overflow-y: auto;
-        margin-bottom: 10px;
-    }
-
-    .cart-item {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 5px;
-    }
-
-    .total {
-        font-weight: bold;
-    }
-
-    .cart-toggle {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        background-color: #6200ea;
-        color: white;
-        border-radius: 50%;
-        padding: 15px;
-        font-size: 24px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-    }
-
-    /* Responsivité */
-    @media (max-width: 600px) {
-        .products {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .product {
-            width: 80%;
-        }
-    }
-
-    /* Formulaire de livraison */
-    .delivery-form {
-        display: none;
-        margin-top: 15px;
-    }
-
-    .delivery-form input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-    }
-    
-                      #about-content {
-            font-size: 14px;
-        }  
-        .a2a_button_snapchat {
-            background-color: yellow;
-        }
 </style>
 </head>
 <body>
@@ -587,8 +291,13 @@ h1 {
     <p>Commandez vos brochettes et boissons fraîches!</p>
     <p class="note">📝 Note : Une fois que votre commande est confirmée, nous avons 15 minutes de préparation. Si un retard dépasse 20 minutes, nous vous enverrons un message. Merci de votre patience! ⏳</p>
 </header>
-    
-    <main>
+
+
+<button id="exclusive-products-button" class="exclusive-button">Produits Exclusifs</button>
+
+
+
+      <main>
         <section class="products">
             <!-- Samoussa -->
             <div class="product">
@@ -659,6 +368,60 @@ h1 {
             </div>
         </section>
         
+
+<main>
+    <section class="products">
+        <!-- (Produits existants ici) -->
+    </section>
+    
+<section class="exclusive-products" id="exclusive-products" style="display: none;">
+    <h2>Produits Exclusifs 🌟</h2>
+    
+    <!-- Produit Exclusif : Crème Deluxe -->
+    <div class="product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/fc10a941-c563-6055-b745-a6e78509a423.jpeg" alt="Crème Deluxe" />
+        <h2>Crème Deluxe</h2>
+        <p>30,00 €</p>
+        <button class="add-to-cart" data-product="Crème Deluxe" data-price="30.00" data-quantity="1">Ajouter au Panier</button>
+    </div>
+    
+    <!-- Produit Exclusif : Fast Gaz -->
+    <div class="product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/719d7a89-c7d5-cadf-3240-3deacacf1407.jpeg" alt="Fast Gaz" />
+        <h2>Fast Gaz</h2>
+        <p>25,00 €</p>
+        <button class="add-to-cart" data-product="Fast Gaz" data-price="25.00" data-quantity="1">Ajouter au Panier</button>
+    </div>
+    
+    <!-- Produit Exclusif : Tank -->
+    <div class="product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/4b02ba0e-b616-0f75-4710-58be6f2f3090.jpeg" alt="Tank" />
+        <h2>Tank</h2>
+        <p>45,00 €</p>
+        <button class="add-to-cart" data-product="Tank" data-price="45.00" data-quantity="1">Ajouter au Panier</button>
+    </div>
+</section>
+
+       <aside class="cart" id="cart">
+            <h2>Panier 🛒</h2>
+            <div class="cart-items" id="cart-items"></div>
+            <div class="total" id="total-price">Total: 0 €</div>
+            <button id="finalize-order">Finaliser la commande</button>
+
+   
+<!-- Formulaire de livraison -->
+<form class="delivery-form" id="delivery-form" style="display: none;" action="https://formspree.io/f/mpwzznqo" method="POST">
+    <input type="hidden" name="products" id="products">
+    <input type="hidden" name="total" id="total">
+    <input type="text" id="name" name="name" placeholder="Votre nom" required>
+    <input type="text" id="phone" name="phone" placeholder="Votre numéro de téléphone" required>
+    <input type="text" id="address" name="address" placeholder="Votre adresse" required>
+    <button type="submit" id="confirm-order">Confirmer la commande</button>
+</form>
+        </aside>
+</main>
+        
+        
         <aside class="cart" id="cart">
             <h2>Panier 🛒</h2>
             <div class="cart-items" id="cart-items"></div>
@@ -717,7 +480,6 @@ h1 {
     </script>
     <script>
   const cartItems = document.getElementById('cart-items');
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
 const cart = document.getElementById('cart');
 const totalPriceElement = document.getElementById('total-price');
 const finalizeOrderButton = document.getElementById('finalize-order');
@@ -745,25 +507,22 @@ closeModalButton.addEventListener('click', () => {
     modal.style.display = 'none'; // Cacher la modale
 });
 
-// Fonction pour vérifier la sélection du menu et du supplément
-function checkMenuAndSupplement() {
-    const selectedBrochette = document.getElementById('brochette-type').value;
-    const selectedSupplement = document.getElementById('brochette-option').value;
-
-    // Activer la canette seulement si un menu et un supplément sont choisis
-    if (selectedBrochette !== "" && selectedSupplement !== "0") {
-        brochetteCanette.disabled = false;
+// Fonction pour calculer les frais de livraison en fonction du total
+function calculateDeliveryFee(total) {
+    if (total < 10) {
+        return 3.50;
+    } else if (total < 20) {
+        return 3.00;
+    } else if (total < 30) {
+        return 2.00;
     } else {
-        brochetteCanette.disabled = true;
-        brochetteCanette.value = "0"; // Réinitialiser la sélection de la canette si désactivée
+        return 0; // Livraison gratuite
     }
 }
 
-// Événements pour vérifier la sélection de menu et de supplément
-document.getElementById('brochette-type').addEventListener('change', checkMenuAndSupplement);
-document.getElementById('brochette-option').addEventListener('change', checkMenuAndSupplement);
-
 // Ajout des articles au panier
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
 addToCartButtons.forEach(button => {
     button.addEventListener('click', () => {
         const productName = button.getAttribute('data-product');
@@ -812,8 +571,11 @@ addToCartButtons.forEach(button => {
 
         // Mettre à jour le prix total
         totalPrice += productPrice * productQuantity;
-        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
 
+        // Calculer et afficher les frais de livraison
+        const deliveryFee = calculateDeliveryFee(totalPrice);
+        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} € (Livraison: ${deliveryFee.toFixed(2)} €)`;
+        
         // Afficher le panier
         cart.style.display = 'block';
     });
@@ -827,7 +589,11 @@ cartItems.addEventListener('click', (event) => {
         const itemPrice = parseFloat(priceText.replace(' €', ''));
 
         totalPrice -= itemPrice; // Soustraire le prix de l'article retiré
-        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} €`;
+        
+        // Recalculer les frais de livraison
+        const deliveryFee = calculateDeliveryFee(totalPrice);
+        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} € (Livraison: ${deliveryFee.toFixed(2)} €)`;
+        
         cartItem.remove(); // Retirer l'élément du DOM
     }
 });
@@ -853,7 +619,11 @@ cartToggleButton.addEventListener('click', () => {
     cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
 });
 
-
+// Ajout de l'événement pour afficher les produits exclusifs
+document.getElementById('exclusive-products-button').addEventListener('click', function() {
+    const exclusiveSection = document.getElementById('exclusive-products');
+    exclusiveSection.style.display = (exclusiveSection.style.display === 'none') ? 'block' : 'none';
+});
 
 
     </script>
