@@ -303,7 +303,6 @@ h1 {
     cursor: pointer; /* Curseur en forme de main au survol */
     transition: background-color 0.3s; /* Transition pour la couleur de fond */
 }
-
 /* Effet de survol sur le bouton */
 .product button:hover {
     background-color: #27ae60; /* Couleur de fond au survol */
@@ -313,42 +312,100 @@ h1 {
 
 
 
-.opening-hours {
-    position: fixed; /* Fixe la barre en haut de la page */
-    top: 0; /* Positionne la barre en haut */
-    left: 0; /* Positionne la barre sur le côté gauche */
-    width: 100%; /* Prend toute la largeur de la page */
-    padding: 10px; /* Un peu de marge intérieure */
-    text-align: center; /* Centrer le texte */
-    z-index: 1000; /* S'assurer qu'elle est au-dessus des autres éléments */
-    transition: opacity 0.5s; /* Pour rendre l'effet de transition fluide */
+
+
+/* Style pour le message d'ouverture */
+.open-notice {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    top: 0;
+    left: 50%; /* Centrer horizontalement */
+    transform: translateX(-50%); /* Ajuster pour le centre */
+    width: 100%; /* Largeur totale */
+    max-width: 300px; /* Limite la largeur maximale à 300px */
+    padding: 10px; /* Moins de padding pour un message plus compact */
+    background-color: rgba(0, 128, 0, 0.8); /* Vert légèrement transparent */
+    color: white;
+    text-align: center;
+    font-size: 1.2em; /* Taille de texte légèrement réduite */
+    z-index: 9999; /* Toujours au-dessus des autres éléments */
+    transition: opacity 0.3s ease;
+    opacity: 0; /* Commence avec une transparence à 0 */
+    border-radius: 8px; /* Coins arrondis pour un style plus élégant */
 }
 
-.open {
-    background-color: rgba(76, 175, 80, 0.8); /* Vert avec transparence */
-    color: white; /* Texte en blanc */
-    opacity: 1; /* Opacité pleine */
+/* Style pour le bouton flottant quand le site est ouvert */
+.floating-button {
+    display: none; /* Caché par défaut */
+    position: fixed;
+    bottom: 20px;
+    right: 90px;
+    padding: 12px 25px; /* Légèrement réduit pour un bouton plus compact */
+    background-color: rgba(50, 205, 50, 0.8); /* Vert légèrement transparent */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 9999;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.closed {
-    background-color: rgba(244, 67, 54, 0.8); /* Rouge avec transparence */
-    color: white; /* Texte en blanc */
-    opacity: 1; /* Opacité pleine */
+.floating-button:hover {
+    transform: scale(1.05); /* Agrandissement léger au survol */
+    background-color: rgba(50, 205, 50, 1); /* Vert plus vif au survol */
 }
 
 
 
+
+
+
+
+
+.responsive-image {
+    border: 2px solid #333; /* Bordure autour de l'image */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 10px; /* Espacement intérieur */
+    margin: 20px 0; /* Espacement vertical pour éviter que ça touche d'autres éléments */
+    overflow: hidden; /* Assure que l'image ne dépasse pas les coins arrondis */
+}
+
+.responsive-image {
+    border: 4px solid rgba(0, 0, 0, 0.7); /* Bordure noire semi-transparente */
+    border-radius: 12px; /* Coins arrondis */
+    padding: 10px; /* Espacement intérieur */
+    margin: 20px 0; /* Espacement vertical */
+    background-color: rgba(255, 255, 255, 0.1); /* Fond blanc légèrement transparent */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre pour un effet de profondeur */
+    transition: transform 0.3s ease; /* Transition pour l'effet de zoom au survol */
+}
+
+/* Styles pour les images */
 .responsive-image img {
-    width: 100%;  /* Prend 100% de la largeur de la div */
-    height: auto; /* Maintient le ratio d'aspect de l'image */
-    max-width: 100%; /* Assure que l'image ne dépasse pas sa largeur d'origine */
+    width: 100%; /* Prend toute la largeur du conteneur */
+    height: auto; /* Garde les proportions */
+    border-radius: 8px; /* Arrondir les coins de l'image pour s'adapter à la bordure */
+    display: block; /* Évite l'espace en dessous de l'image */
+}
+
+/* Effet de zoom au survol de l'image */
+.responsive-image:hover {
+    transform: scale(1.05); /* Légère augmentation de la taille au survol */
 }
 </style>
 </head>
 <body>
-<div id="opening-hours" class="opening-hours">
-    <span id="status-message">Nous sommes actuellement fermés. Ouverture à 19h30.</span>
+<!-- Message qui s'affiche si le site est fermé -->
+<div id="closed-message" class="closed-notice">
+    Nous sommes actuellement fermés. Ouverture à 19h30 jusqu'à 3h30.
 </div>
+
+<!-- Bouton flottant qui s'affiche si le site est ouvert -->
+<button id="open-button" class="floating-button">
+    Nous sommes ouverts !
+</button>
 
 
 <header>
@@ -588,37 +645,64 @@ h1 {
         
 
 
-// Fonction pour vérifier si le site est ouvert
+
+
+// Fonction pour vérifier si l'heure actuelle est dans les heures d'ouverture
 function checkOpeningHours() {
-    const currentHour = new Date().getHours(); // Obtenir l'heure actuelle
-    const currentMinute = new Date().getMinutes(); // Obtenir les minutes actuelles
-    const statusMessage = document.getElementById('status-message');
-    const openingHoursDiv = document.getElementById('opening-hours');
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    
+    const openingHour = 19;
+    const openingMinute = 30;
+    const closingHour = 3; // Fermeture à 3h30 du matin
 
-    // Heures d'ouverture
-    const openingTime = 19.5; // 19h30
-    const closingTime = 3.5; // 3h30 du matin (en utilisant un format décimal pour les heures)
+    let isOpen = false;
 
-    // Vérifie si nous sommes ouverts ou fermés
-    if (currentHour >= openingTime || currentHour < closingTime) {
-        // Si l'heure actuelle est entre 19h30 et 3h30
-        statusMessage.textContent = "Nous sommes actuellement ouverts !"; // Message pour ouvert
-        openingHoursDiv.classList.add('open'); // Ajoute la classe pour l'ouverture
-        openingHoursDiv.classList.remove('closed'); // Enlève la classe pour la fermeture
+    // Si on est après 19h30 et avant minuit
+    if (currentHour > openingHour || (currentHour === openingHour && currentMinute >= openingMinute)) {
+        isOpen = true;
+    }
+
+    // Si on est après minuit mais avant 3h30
+    if (currentHour < closingHour || (currentHour === closingHour && currentMinute <= 30)) {
+        isOpen = true;
+    }
+
+    return isOpen;
+}
+
+// Fonction pour afficher ou cacher les éléments selon l'heure
+function updateSiteStatus() {
+    const isOpen = checkOpeningHours();
+
+    const closedMessage = document.getElementById('closed-message');
+    const openButton = document.getElementById('open-button');
+
+    if (isOpen) {
+        closedMessage.style.display = 'none'; // Cacher le message de fermeture
+        openButton.style.display = 'block'; // Afficher le bouton flottant
     } else {
-        // Si l'heure actuelle est en dehors des heures d'ouverture
-        statusMessage.textContent = "Nous sommes actuellement fermés. Ouverture à 19h30."; // Message pour fermé
-        openingHoursDiv.classList.add('closed'); // Ajoute la classe pour la fermeture
-        openingHoursDiv.classList.remove('open'); // Enlève la classe pour l'ouverture
+        closedMessage.style.display = 'block'; // Afficher le message de fermeture
+        closedMessage.style.opacity = '1'; // Afficher avec transition
+        openButton.style.display = 'none'; // Cacher le bouton flottant
+
+        // Retirer le message après 5 secondes (5000 ms) - Ajustable
+        setTimeout(function() {
+            closedMessage.style.opacity = '0'; // Commence à disparaître
+            setTimeout(function() {
+                closedMessage.style.display = 'none'; // Cacher complètement après l'animation
+            }, 500); // Délai de la transition CSS (0.5s pour l'animation de disparition)
+        }, 5000); // 5000 ms = 5 secondes, ajustable selon tes besoins
     }
 }
 
-// Vérifier les heures d'ouverture au chargement de la page
-window.onload = checkOpeningHours;
-
-// Vérifier toutes les heures (optionnel)
-setInterval(checkOpeningHours, 3600000); // Vérifier toutes les heures
-    </script>
+// Appeler la fonction dès que la page se charge
+document.addEventListener('DOMContentLoaded', function() {
+    updateSiteStatus();
+    setInterval(updateSiteStatus, 60000); // Vérifier toutes les minutes
+});
+</script>
     <script>
   
   
