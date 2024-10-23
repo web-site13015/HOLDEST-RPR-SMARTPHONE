@@ -280,10 +280,39 @@ h1 {
     background-color: #27ae60; /* Couleur de fond au survol */
 }
 
+
+
+
+
+
+.opening-hours {
+    position: fixed; /* Fixe la barre en haut de la page */
+    top: 0; /* Positionne la barre en haut */
+    left: 0; /* Positionne la barre sur le côté gauche */
+    width: 100%; /* Prend toute la largeur de la page */
+    padding: 10px; /* Un peu de marge intérieure */
+    text-align: center; /* Centrer le texte */
+    z-index: 1000; /* S'assurer qu'elle est au-dessus des autres éléments */
+    transition: opacity 0.5s; /* Pour rendre l'effet de transition fluide */
+}
+
+.open {
+    background-color: rgba(76, 175, 80, 0.8); /* Vert avec transparence */
+    color: white; /* Texte en blanc */
+    opacity: 1; /* Opacité pleine */
+}
+
+.closed {
+    background-color: rgba(244, 67, 54, 0.8); /* Rouge avec transparence */
+    color: white; /* Texte en blanc */
+    opacity: 1; /* Opacité pleine */
+}
 </style>
 </head>
 <body>
-
+<div id="opening-hours" class="opening-hours">
+    <span id="status-message">Nous sommes actuellement fermés. Ouverture à 19h30.</span>
+</div>
 
 
 <header>
@@ -366,6 +395,46 @@ h1 {
                 </select>
                 <button class="add-to-cart" data-product="Boisson" data-price="2" data-quantity="1" id="add-drink">Ajouter au Panier</button>
             </div>
+            
+            
+
+<!-- PUFFs -->
+<div class="product">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/5ace1e36-6d11-e0e6-d983-d5e725ad6f36.jpg" alt="PUFFs Électroniques" />
+    <h2>PUFFs 🫧</h2>
+    <p>PUFFs à partir de 15 €</p>
+
+    <!-- Sélection de modèle à 9000 bouffées - 15 € -->
+    <label for="puffs-type">Choisissez un modèle (9000 bouffées - 15 €) :</label>
+    <select id="puffs-type">
+        <option value="">-- Sélectionner --</option>
+        <option value="15">PUFF Mangue 🥭 (15 €)</option>
+        <option value="15">PUFF Fraise 🍓 (15 €)</option>
+    </select>
+
+    <!-- Supplément : 15000 bouffées à 20 € -->
+    <label for="puffs-option">Choisissez un modèle 15000 bouffées (20 €) :</label>
+    <select id="puffs-option">
+        <option value="0">Aucun supplément</option>
+        <option value="20">PUFF Pastèque 🍉 (+20 €)</option>
+        <option value="20">PUFF Menthe 🍃 (+20 €)</option>
+    </select>
+
+    <!-- Ajout boisson à 1 € -->
+    <label for="puffs-drink">Ajoutez une boisson pour 1 € :</label>
+    <select id="puffs-drink">
+        <option value="0">Aucune</option>
+        <option value="1">Coca 🥤 (+1 €)</option>
+        <option value="1">Sprite 🥤 (+1 €)</option>
+        <option value="1">Fanta 🥤 (+1 €)</option>
+    </select>
+
+    <!-- Bouton d'ajout au panier -->
+    <button class="add-to-cart" data-product="PUFF" data-price="15" data-quantity="1" id="add-puffs">Ajouter au Panier</button>
+</div>
+
+
+
         </section>
         
 
@@ -375,16 +444,7 @@ h1 {
     </section>
     
 <section class="exclusive-products" id="exclusive-products" style="display: none;">
-   
-<div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https://www.canva.com/design/DAGUY1LqpUY/xxlfOet-nQtqIeScKOJU6g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-  </iframe>
-</div>
-<a href="https://www.snapchat.com/add/lucious-lion04?share_id=GsE5bNV2RVI&locale=fr-FR" target="_blank" rel="noopener"> 👻BROSHPSTREET 🍢</a>
- <h2>Produits Exclusifs 🌟</h2>
+    <h2>Produits Exclusifs 🌟</h2>
     
     <!-- Produit Exclusif : Crème Deluxe (Livraison incluse à 1,50 €) -->
     <div class="product">
@@ -486,12 +546,46 @@ h1 {
             } else {
                 socialSharing.style.display = 'block'; // Afficher le code en montant
             }
-
             lastScrollTop = st;
         });
+        
+
+
+// Fonction pour vérifier si le site est ouvert
+function checkOpeningHours() {
+    const currentHour = new Date().getHours(); // Obtenir l'heure actuelle
+    const currentMinute = new Date().getMinutes(); // Obtenir les minutes actuelles
+    const statusMessage = document.getElementById('status-message');
+    const openingHoursDiv = document.getElementById('opening-hours');
+
+    // Heures d'ouverture
+    const openingTime = 19.5; // 19h30
+    const closingTime = 3.5; // 3h30 du matin (en utilisant un format décimal pour les heures)
+
+    // Vérifie si nous sommes ouverts ou fermés
+    if (currentHour >= openingTime || currentHour < closingTime) {
+        // Si l'heure actuelle est entre 19h30 et 3h30
+        statusMessage.textContent = "Nous sommes actuellement ouverts !"; // Message pour ouvert
+        openingHoursDiv.classList.add('open'); // Ajoute la classe pour l'ouverture
+        openingHoursDiv.classList.remove('closed'); // Enlève la classe pour la fermeture
+    } else {
+        // Si l'heure actuelle est en dehors des heures d'ouverture
+        statusMessage.textContent = "Nous sommes actuellement fermés. Ouverture à 19h30."; // Message pour fermé
+        openingHoursDiv.classList.add('closed'); // Ajoute la classe pour la fermeture
+        openingHoursDiv.classList.remove('open'); // Enlève la classe pour l'ouverture
+    }
+}
+
+// Vérifier les heures d'ouverture au chargement de la page
+window.onload = checkOpeningHours;
+
+// Vérifier toutes les heures (optionnel)
+setInterval(checkOpeningHours, 3600000); // Vérifier toutes les heures
     </script>
     <script>
-  const cartItems = document.getElementById('cart-items');
+  
+  
+const cartItems = document.getElementById('cart-items');
 const cart = document.getElementById('cart');
 const totalPriceElement = document.getElementById('total-price');
 const finalizeOrderButton = document.getElementById('finalize-order');
@@ -631,11 +725,6 @@ cartToggleButton.addEventListener('click', () => {
     cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
 });
 
-// Ajout de l'événement pour afficher les produits exclusifs
-document.getElementById('exclusive-products-button').addEventListener('click', function() {
-    const exclusiveSection = document.getElementById('exclusive-products');
-    exclusiveSection.style.display = (exclusiveSection.style.display === 'none') ? 'block' : 'none';
-});
 
 
 
@@ -652,4 +741,4 @@ document.getElementById('exclusive-products-button').addEventListener('click', f
 });
     </script>
 </body>
-    </html>
+                    </html>
