@@ -375,29 +375,41 @@ h1 {
     </section>
     
 <section class="exclusive-products" id="exclusive-products" style="display: none;">
-    <h2>Produits Exclusifs 🌟</h2>
+   
+<div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+ border-radius: 8px; will-change: transform;">
+  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+    src="https://www.canva.com/design/DAGUY1LqpUY/xxlfOet-nQtqIeScKOJU6g/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+  </iframe>
+</div>
+<a href="https://www.snapchat.com/add/lucious-lion04?share_id=GsE5bNV2RVI&locale=fr-FR" target="_blank" rel="noopener"> 👻BROSHPSTREET 🍢</a>
+ <h2>Produits Exclusifs 🌟</h2>
     
-    <!-- Produit Exclusif : Crème Deluxe -->
+    <!-- Produit Exclusif : Crème Deluxe (Livraison incluse à 1,50 €) -->
     <div class="product">
         <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/fc10a941-c563-6055-b745-a6e78509a423.jpeg" alt="Crème Deluxe" />
         <h2>Crème Deluxe</h2>
         <p>30,00 €</p>
+        <p><strong>Livraison incluse : 1,50 €</strong></p> <!-- Note sur la livraison -->
         <button class="add-to-cart" data-product="Crème Deluxe" data-price="30.00" data-quantity="1">Ajouter au Panier</button>
     </div>
     
-    <!-- Produit Exclusif : Fast Gaz -->
+    <!-- Produit Exclusif : Fast Gaz (Livraison incluse à 2,00 €) -->
     <div class="product">
         <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/719d7a89-c7d5-cadf-3240-3deacacf1407.jpeg" alt="Fast Gaz" />
         <h2>Fast Gaz</h2>
         <p>25,00 €</p>
+        <p><strong>Livraison incluse : 2,00 €</strong></p> <!-- Note sur la livraison -->
         <button class="add-to-cart" data-product="Fast Gaz" data-price="25.00" data-quantity="1">Ajouter au Panier</button>
     </div>
     
-    <!-- Produit Exclusif : Tank -->
+    <!-- Produit Exclusif : Tank (Livraison gratuite) -->
     <div class="product">
         <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/4b02ba0e-b616-0f75-4710-58be6f2f3090.jpeg" alt="Tank" />
         <h2>Tank</h2>
         <p>45,00 €</p>
+        <p><strong>Livraison gratuite</strong></p> <!-- Note sur la livraison -->
         <button class="add-to-cart" data-product="Tank" data-price="45.00" data-quantity="1">Ajouter au Panier</button>
     </div>
 </section>
@@ -626,6 +638,18 @@ document.getElementById('exclusive-products-button').addEventListener('click', f
 });
 
 
+
+
+
+
+// Ajout de l'événement pour afficher les produits exclusifs et faire défiler jusqu'à eux
+document.getElementById('exclusive-products-button').addEventListener('click', function() {
+    const exclusiveSection = document.getElementById('exclusive-products');
+    exclusiveSection.style.display = 'block'; // Afficher la section exclusive
+
+    // Faire défiler jusqu'à la section des produits exclusifs
+    exclusiveSection.scrollIntoView({ behavior: 'smooth' });
+});
     </script>
 </body>
     </html>
