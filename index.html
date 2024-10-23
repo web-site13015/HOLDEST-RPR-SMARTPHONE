@@ -533,9 +533,7 @@ h1 {
         
 
 <main>
-    <section class="products">
-        <!-- (Produits existants ici) -->
-    </section>
+
     
 <section class="exclusive-products" id="exclusive-products" style="display: none;">
     <h2>Produits Exclusifs 🌟</h2>
@@ -703,9 +701,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(updateSiteStatus, 60000); // Vérifier toutes les minutes
 });
 </script>
-    <script>
-  
-  
+
+
+<script>
 const cartItems = document.getElementById('cart-items');
 const cart = document.getElementById('cart');
 const totalPriceElement = document.getElementById('total-price');
@@ -746,6 +744,31 @@ function calculateDeliveryFee(total) {
         return 0; // Livraison gratuite
     }
 }
+
+// Fonction pour mettre à jour le total avec les frais de livraison
+function updateTotalPrice() {
+    const deliveryFee = calculateDeliveryFee(totalPrice);
+    const totalWithDelivery = totalPrice + deliveryFee;
+    totalPriceElement.textContent = `Total: ${totalWithDelivery.toFixed(2)} € (incluant ${deliveryFee.toFixed(2)} € de frais de livraison)`;
+}
+
+// Fonction pour vérifier la sélection du menu et du supplément
+function checkMenuAndSupplement() {
+    const selectedBrochette = document.getElementById('brochette-type').value;
+    const selectedSupplement = document.getElementById('brochette-option').value;
+
+    // Activer la canette seulement si un menu et un supplément sont choisis
+    if (selectedBrochette !== "" && selectedSupplement !== "0") {
+        brochetteCanette.disabled = false;
+    } else {
+        brochetteCanette.disabled = true;
+        brochetteCanette.value = "0"; // Réinitialiser la sélection de la canette si désactivée
+    }
+}
+
+// Événements pour vérifier la sélection de menu et de supplément
+document.getElementById('brochette-type').addEventListener('change', checkMenuAndSupplement);
+document.getElementById('brochette-option').addEventListener('change', checkMenuAndSupplement);
 
 // Ajout des articles au panier
 const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -799,10 +822,9 @@ addToCartButtons.forEach(button => {
         // Mettre à jour le prix total
         totalPrice += productPrice * productQuantity;
 
-        // Calculer et afficher les frais de livraison
-        const deliveryFee = calculateDeliveryFee(totalPrice);
-        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} € (Livraison: ${deliveryFee.toFixed(2)} €)`;
-        
+        // Mettre à jour l'affichage du prix total avec frais de livraison
+        updateTotalPrice();
+
         // Afficher le panier
         cart.style.display = 'block';
     });
@@ -816,11 +838,10 @@ cartItems.addEventListener('click', (event) => {
         const itemPrice = parseFloat(priceText.replace(' €', ''));
 
         totalPrice -= itemPrice; // Soustraire le prix de l'article retiré
-        
-        // Recalculer les frais de livraison
-        const deliveryFee = calculateDeliveryFee(totalPrice);
-        totalPriceElement.textContent = `Total: ${totalPrice.toFixed(2)} € (Livraison: ${deliveryFee.toFixed(2)} €)`;
-        
+
+        // Mettre à jour l'affichage du prix total avec frais de livraison
+        updateTotalPrice();
+
         cartItem.remove(); // Retirer l'élément du DOM
     }
 });
@@ -832,10 +853,16 @@ finalizeOrderButton.addEventListener('click', () => {
         return;
     }
 
+    // Calcul des frais de livraison (déjà pris en compte dans la fonction updateTotalPrice)
+    const deliveryFee = calculateDeliveryFee(totalPrice);
+
+    // Mettre à jour le prix total avec les frais de livraison
+    totalPriceElement.textContent = `Total: ${(totalPrice + deliveryFee).toFixed(2)} € (incluant ${deliveryFee.toFixed(2)} € de frais de livraison)`;
+
     // Remplir les champs cachés du formulaire avec les informations du panier
     document.getElementById('products').value = Array.from(cartItems.children)
         .map(item => item.textContent.split(' - ')[0]).join(', '); // Produits ajoutés
-    document.getElementById('total').value = totalPrice.toFixed(2); // Total
+    document.getElementById('total').value = totalPrice.toFixed(2); // Total sans frais de livraison
 
     // Afficher le formulaire de livraison
     deliveryForm.style.display = 'block'; // Afficher le formulaire de livraison
@@ -845,6 +872,12 @@ finalizeOrderButton.addEventListener('click', () => {
 cartToggleButton.addEventListener('click', () => {
     cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
 });
+
+
+        
+
+
+
 
 
 
