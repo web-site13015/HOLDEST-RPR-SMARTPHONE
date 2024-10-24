@@ -360,10 +360,6 @@ h1 {
 
 
 
-
-
-
-
 .responsive-image {
     border: 2px solid #333; /* Bordure autour de l'image */
     border-radius: 8px; /* Coins arrondis */
@@ -423,21 +419,30 @@ h1 {
       <main>
         <section class="products">
             <!-- Samoussa -->
-            <div class="product">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" />
-                <h2>Samoussa 🥟</h2>
-                <p>5,50 € les 6 pièces</p>
-                <label for="samoussa-option">Choisissez un supplément :</label>
-                <select id="samoussa-option">
-                    <option value="0">Aucun</option>
-                    <option value="2">Supplément Manioc 🍠 (+2 €)</option>
-                    <option value="2">Supplément Banane 🍌 (+2 €)</option>
-                    <option value="2">Salade Papaye 🥗 (+2 €)</option>
-                    <option value="2">Salade Mangue 🥭 (+2 €)</option>
-                </select>
-                <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
-            </div>
+     
+<div class="product">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" />
+    <h2>Samoussa 🥟</h2>
+    <p>5,50 € les 6 pièces</p>
 
+    <label for="samoussa-type">Choisissez un type de samoussa :</label>
+    <select id="samoussa-type">
+        <option value="">--Sélectionner--</option>
+        <option value="viande">Viande 🍖</option>
+        <option value="poisson">Poisson 🐟</option>
+        <option value="légumes">Légumes 🥕</option>
+    </select>
+
+    <label for="samoussa-canette">Choisir une canette (si désirée) :</label>
+    <select id="samoussa-canette">
+        <option value="0">--Pas de canette--</option>
+        <option value="1.50">Canette Coca 🥤 (1,50 €)</option>
+        <option value="1.50">Canette Sprite 🥤 (1,50 €)</option>
+        <option value="1.50">Canette Fanta 🥤 (1,50 €)</option>
+    </select>
+
+    <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
+</div>
             <!-- Brochette -->
             <div class="product">
                 <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" alt="Brochette de Poulet" />
@@ -469,28 +474,38 @@ h1 {
 
                 <button class="add-to-cart" data-product="Brochette" data-price="6.50" data-quantity="1" id="add-brochette">Ajouter au Panier</button>
             </div>
+            
+<!-- Boissons -->
+<div class="product">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" alt="Boissons Canette" />
+    <h2>Boisson, Drink et Gourmandise 🥤</h2>
+    <p>Choisissez parmi notre sélection de boissons et gourmandises.</p>
+    
+    <label for="drink-select">Choisissez une boisson :</label>
+    <select id="drink-select">
+        <option value="">-- Sélectionner --</option>
+        <option value="2">Coca 🥤 - 2 €</option>
+        <option value="2">Sprite 🥤 - 2 €</option>
+        <option value="2">Fanta 🥤 - 2 €</option>
+        <option value="3">Red Bull 🥤 - 3 €</option>
+    </select>
 
-            <!-- Boissons -->
-            <div class="product">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" alt="Boissons Canette" />
-                <h2>Boissons Canette 🥤</h2>
-                <p>Choisissez parmi notre sélection de boissons à 2 €.</p>
-                <label for="drink-select">Choisissez une boisson :</label>
-                <select id="drink-select">
-                    <option value="">-- Sélectionner --</option>
-                    <option value="2">Coca 🥤</option>
-                    <option value="2">Sprite 🥤</option>
-                    <option value="2">Fanta 🥤</option>
-                </select>
-                <label for="drink-option">Ajoutez un supplément :</label>
-                <select id="drink-option">
-                    <option value="0">Aucun</option>
-                    <option value="0.50">Glaçons 🧊 (+0,50 €)</option>
-                </select>
-                <button class="add-to-cart" data-product="Boisson" data-price="2" data-quantity="1" id="add-drink">Ajouter au Panier</button>
-            </div>
-            
-            
+    <label for="gourmandise-select">Choisissez une gourmandise :</label>
+    <select id="gourmandise-select">
+        <option value="">-- Sélectionner --</option>
+        <option value="4">Chips 🍟 - 4 €</option>
+        <option value="5">Barre Chocolat 🍫 - 5 €</option>
+        <option value="6">Gâteau 🍰 - 6 €</option>
+        <option value="7">Bonbons 🍬 - 7 €</option>
+    </select>
+
+    <button class="add-to-cart" data-product="Boisson" data-price="0" data-quantity="1" id="add-drink">Ajouter au Panier</button>
+</div>
+     
+     
+
+
+       
 
 <!-- PUFFs -->
 <div class="product">
@@ -702,7 +717,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
 <script>
 const cartItems = document.getElementById('cart-items');
 const cart = document.getElementById('cart');
@@ -780,9 +794,17 @@ addToCartButtons.forEach(button => {
         const productQuantity = parseInt(button.getAttribute('data-quantity'));
 
         // Suppléments pour Samoussa
-        const samoussaOption = document.getElementById('samoussa-option').value;
-        if (productName === "Samoussa" && samoussaOption != "0") {
-            productPrice += parseFloat(samoussaOption); // Ajout du supplément
+        if (productName === "Samoussa") {
+            const samoussaType = document.getElementById('samoussa-type').value; // Type de samoussa
+            const samoussaCanette = document.getElementById('samoussa-canette').value; // Canette
+
+            if (samoussaType === "") {
+                showModal("Veuillez choisir un type de samoussa !");
+                return; // Ne pas ajouter si aucun type n'est sélectionné
+            }
+
+            // Ajout du prix de la canette si sélectionnée
+            productPrice += parseFloat(samoussaCanette);
         }
 
         // Suppléments pour Brochette
@@ -804,10 +826,19 @@ addToCartButtons.forEach(button => {
         }
 
         // Suppléments pour Boissons
-        const drinkOption = document.getElementById('drink-option').value;
-        if (productName === "Boisson" && drinkOption === "0") {
-            showModal("Veuillez choisir une boisson !");
-            return; // Ne pas ajouter si aucune boisson n'est sélectionnée
+        const drinkOption = document.getElementById('drink-select').value; // Nouvelle sélection pour les boissons
+        const gourmandiseOption = document.getElementById('gourmandise-select').value; // Nouvelle sélection pour les gourmandises
+
+        if (productName === "Boisson") {
+            if (drinkOption === "") {
+                showModal("Veuillez choisir une boisson !");
+                return; // Ne pas ajouter si aucune boisson n'est sélectionnée
+            }
+            productPrice += parseFloat(drinkOption); // Ajout du prix de la boisson sélectionnée
+
+            if (gourmandiseOption !== "") {
+                productPrice += parseFloat(gourmandiseOption); // Ajout du prix de la gourmandise sélectionnée
+            }
         }
 
         // Créer un nouvel élément dans le panier
@@ -853,11 +884,8 @@ finalizeOrderButton.addEventListener('click', () => {
         return;
     }
 
-    // Calcul des frais de livraison (déjà pris en compte dans la fonction updateTotalPrice)
-    const deliveryFee = calculateDeliveryFee(totalPrice);
-
     // Mettre à jour le prix total avec les frais de livraison
-    totalPriceElement.textContent = `Total: ${(totalPrice + deliveryFee).toFixed(2)} € (incluant ${deliveryFee.toFixed(2)} € de frais de livraison)`;
+    updateTotalPrice();
 
     // Remplir les champs cachés du formulaire avec les informations du panier
     document.getElementById('products').value = Array.from(cartItems.children)
@@ -872,13 +900,6 @@ finalizeOrderButton.addEventListener('click', () => {
 cartToggleButton.addEventListener('click', () => {
     cart.style.display = (cart.style.display === 'block') ? 'none' : 'block';
 });
-
-
-        
-
-
-
-
 
 
 
