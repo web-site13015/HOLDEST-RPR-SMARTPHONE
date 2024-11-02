@@ -333,10 +333,6 @@ h1 {
 
 
 
-
-
-
-
 /* Style pour le message d'ouverture */
 .open-notice {
     display: none; /* Caché par défaut */
@@ -435,121 +431,133 @@ h1 {
 
 <button id="exclusive-products-button" class="exclusive-button">Produits Exclusifs</button>
 
-<!-- Div pour l'image mise en avant -->
-<div class="responsive-image">
-    <img src="https://scontent-mia3-1.cdninstagram.com/v/t51.29350-15/337150012_937513837440343_8146951156437693373_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=18de74&_nc_ohc=4KJGS0OC69gQ7kNvgH911h9&_nc_zt=23&_nc_ht=scontent-mia3-1.cdninstagram.com&edm=AM6HXa8EAAAA&_nc_gid=AImF6g0U2UAScOwai_X_sO0&oh=00_AYBn237ele0tZgcnGS1gF_GVlKUvgRbr5oHApkHbQpEleA&oe=671EF269" alt="Image mise en avant" />
-</div>
-      <main>
-        <section class="products">
-            <!-- Samoussa -->
-     
-<div class="product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" />
-    <h2>Samoussa 🥟</h2>
-    <p>5,50 € les 6 pièces</p>
+<main>
+    <section class="products">
+        <div class="product" itemscope itemtype="http://schema.org/Product">
+            <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" itemprop="image" />
+            <h2 itemprop="name">Samoussa 🥟</h2>
+            <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <span itemprop="priceCurrency" content="EUR">€</span>
+                <span itemprop="price" content="5.50">5,50</span> les 6 pièces
+                <link itemprop="availability" href="http://schema.org/InStock" />
+            </p>
 
-    <label for="samoussa-type">Choisissez un type de samoussa :</label>
-    <select id="samoussa-type">
-        <option value="">--Sélectionner--</option>
-        <option value="viande">Viande 🍖</option>
-        <option value="poisson">Poisson 🐟</option>
-        <option value="légumes">Légumes 🥕</option>
-    </select>
+            <label for="samoussa-type">Choisissez un type de samoussa :</label>
+            <select id="samoussa-type">
+                <option value="">--Sélectionner--</option>
+                <option value="viande">Viande 🍖</option>
+                <option value="poisson">Poisson 🐟</option>
+                <option value="légumes">Légumes 🥕</option>
+            </select>
 
-    <label for="samoussa-canette">Choisir une canette (si désirée) :</label>
-    <select id="samoussa-canette">
-        <option value="0">--Pas de canette--</option>
-        <option value="1.50">Canette Coca 🥤 (1,50 €)</option>
-        <option value="1.50">Canette Sprite 🥤 (1,50 €)</option>
-        <option value="1.50">Canette Fanta 🥤 (1,50 €)</option>
-    </select>
+            <label for="samoussa-canette">Choisir une canette (si désirée) :</label>
+            <select id="samoussa-canette">
+                <option value="0">--Pas de canette--</option>
+                <option value="1.50">Canette Coca 🥤 (1,50 €)</option>
+                <option value="1.50">Canette Sprite 🥤 (1,50 €)</option>
+                <option value="1.50">Canette Fanta 🥤 (1,50 €)</option>
+                
+                 <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
+            </select>
 
+           
+        </div>
+    
     <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
 </div>
-            <!-- Brochette -->
-            <div class="product">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" alt="Brochette de Poulet" />
-                <h2>Brochette 🍢</h2>
-                <p>Menu à 6,50 €</p>
-                <label for="brochette-type">Type de brochette :</label>
-                <select id="brochette-type">
-                    <option value="">Choisissez...</option>
-                    <option value="Poulet">Brochette de Poulet 🍗</option>
-                    <option value="Viande">Brochette de Viande Halal 🥩</option>
-                    <option value="Crevettes">Brochette de Crevettes 🦐</option>
-                </select>
-                <label for="brochette-option">Choisissez un supplément :</label>
-<select id="brochette-option">
-    <option value="0">Aucun</option>
-    <option value="2.50">Riz 🍚 (+2,50 €)</option>
-    <option value="2.50">Frites 🍟 (+2,50 €)</option>
-    <option value="2.50">Manioc 🍠 (+2,50 €)</option>
-    <option value="2.50">Banane 🍌 (+2,50 €)</option>
-</select>
+  <!-- Brochette -->
+<div class="product" itemscope itemtype="http://schema.org/Product">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" 
+         alt="Brochette de Poulet" 
+         itemprop="image" />
+    <h2 itemprop="name">Brochette 🍢</h2>
+    <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+        <span itemprop="priceCurrency" content="EUR">€</span>
+        <span itemprop="price" content="6.50">6,50</span> (Menu)
+        <link itemprop="availability" href="http://schema.org/InStock" />
+    </p>
+    
+    <label for="brochette-type">Type de brochette :</label>
+    <select id="brochette-type">
+        <option value="">Choisissez...</option>
+        <option value="Poulet">Brochette de Poulet 🍗</option>
+        <option value="Viande">Brochette de Viande Halal 🥩</option>
+        <option value="Crevettes">Brochette de Crevettes 🦐</option>
+    </select>
 
-                <label for="brochette-canette">Ajoutez une boisson pour 1 € :</label>
-                <select id="brochette-canette">
-                    <option value="0">Aucune</option>
-                    <option value="1">Coca 🥤 (+1 €)</option>
-                    <option value="1">Sprite 🥤 (+1 €)</option>
-                    <option value="1">Fanta 🥤 (+1 €)</option>
-                </select>
+    <label for="brochette-option">Choisissez un supplément :</label>
+    <select id="brochette-option">
+        <option value="0">Aucun</option>
+        <option value="2.50">Riz 🍚 (+2,50 €)</option>
+        <option value="2.50">Frites 🍟 (+2,50 €)</option>
+        <option value="2.50">Manioc 🍠 (+2,50 €)</option>
+        <option value="2.50">Banane 🍌 (+2,50 €)</option>
+    </select>
 
-                <button class="add-to-cart" data-product="Brochette" data-price="6.50" data-quantity="1" id="add-brochette">Ajouter au Panier</button>
-            </div>
+    <label for="brochette-canette">Ajoutez une boisson pour 1 € :</label>
+    <select id="brochette-canette">
+        <option value="0">Aucune</option>
+        <option value="1">Coca 🥤 (+1 €)</option>
+        <option value="1">Sprite 🥤 (+1 €)</option>
+        <option value="1">Fanta 🥤 (+1 €)</option>
+    </select>
+
+    <button class="add-to-cart" data-product="Brochette" data-price="6.50" data-quantity="1" id="add-brochette">Ajouter au Panier</button>
+</div>   
             
-<!-- Boissons -->
-<div class="product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" alt="Boissons Canette" />
-    <h2>Boisson, Drink et Gourmandise 🥤</h2>
-    <p>Choisissez parmi notre sélection de boissons et gourmandises.</p>
+
+     <!-- Boissons -->
+<div class="product" itemscope itemtype="http://schema.org/Product">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" 
+         alt="Boissons Canette" 
+         itemprop="image" />
+    <h2 itemprop="name">Boisson, Drink et Gourmandise 🥤</h2>
+    <p itemprop="description">Choisissez parmi notre sélection de boissons et gourmandises.</p>
     
     <label for="drink-select">Choisissez une boisson :</label>
     <select id="drink-select">
         <option value="">-- Sélectionner --</option>
-        <option value="2">Coca 🥤 - 2 €</option>
-        <option value="2">Sprite 🥤 - 2 €</option>
-        <option value="2">Fanta 🥤 - 2 €</option>
-        <option value="3">Red Bull 🥤 - 3 €</option>
+        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Coca 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
+        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Sprite 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
+        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Fanta 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
+        <option value="3" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Red Bull 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="3">3</span></option>
     </select>
 
     <label for="gourmandise-select">Choisissez une gourmandise :</label>
     <select id="gourmandise-select">
         <option value="">-- Sélectionner --</option>
-        <option value="4">Chips 🍟 - 4 €</option>
-        <option value="5">Barre Chocolat 🍫 - 5 €</option>
-        <option value="6">Gâteau 🍰 - 6 €</option>
-        <option value="7">Bonbons 🍬 - 7 €</option>
+        <option value="4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Chips 🍟 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="4">4</span></option>
+        <option value="5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Barre Chocolat 🍫 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="5">5</span></option>
+        <option value="6" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Gâteau 🍰 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="6">6</span></option>
+        <option value="7" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Bonbons 🍬 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="7">7</span></option>
     </select>
 
     <button class="add-to-cart" data-product="Boisson" data-price="0" data-quantity="1" id="add-drink">Ajouter au Panier</button>
 </div>
      
-     
-
-
-       
 
 <!-- PUFFs -->
-<div class="product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/77789d81-33bb-1fd3-2e01-029135c6d09b.jpg" alt="PUFFs Électroniques" />
-    <h2>PUFFs 🫧</h2>
-    <p>PUFFs à partir de 15 €</p>
+<div class="product" itemscope itemtype="http://schema.org/Product">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/77789d81-33bb-1fd3-2e01-029135c6d09b.jpg" 
+         alt="PUFFs Électroniques" 
+         itemprop="image" />
+    <h2 itemprop="name">PUFFs 🫧</h2>
+    <p itemprop="description">PUFFs à partir de <span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></span></p>
 
     <!-- Sélection de modèle à 9000 bouffées - 15 € -->
     <label for="puffs-type">Choisissez un modèle (9000 bouffées - 15 €) :</label>
     <select id="puffs-type">
         <option value="">-- Sélectionner --</option>
-        <option value="15">PUFF Mangue 🥭 (15 €)</option>
-        <option value="15">PUFF Fraise 🍓 (15 €)</option>
+        <option value="15" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Mangue 🥭 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></option>
+        <option value="15" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Fraise 🍓 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></option>
     </select>
 
     <!-- Supplément : 15000 bouffées à 20 € -->
     <label for="puffs-option">Choisissez un modèle 15000 bouffées (20 €) :</label>
     <select id="puffs-option">
         <option value="0">Aucun supplément</option>
-        <option value="20">PUFF Pastèque 🍉 (+20 €)</option>
-        <option value="20">PUFF Menthe 🍃 (+20 €)</option>
+        <option value="20" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Pastèque 🍉 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="20">20</span></option>
+        <option value="20" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Menthe 🍃 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="20">20</span></option>
     </select>
 
     <!-- Ajout boisson à 1 € -->
@@ -564,41 +572,48 @@ h1 {
     <!-- Bouton d'ajout au panier -->
     <button class="add-to-cart" data-product="PUFF" data-price="15" data-quantity="1" id="add-puffs">Ajouter au Panier</button>
 </div>
+       
 
-
-
-        </section>
-        
-
-<main>
 
     
 <section class="exclusive-products" id="exclusive-products" style="display: none;">
     <h2>Produits Exclusifs 🌟</h2>
     
     <!-- Produit Exclusif : Crème Deluxe (Livraison incluse à 1,50 €) -->
-    <div class="product">
-        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/fc10a941-c563-6055-b745-a6e78509a423.jpeg" alt="Crème Deluxe" />
-        <h2>Crème Deluxe</h2>
-        <p>30,00 €</p>
-        <p><strong>Livraison incluse : 1,50 €</strong></p> <!-- Note sur la livraison -->
+    <div class="product" itemscope itemtype="http://schema.org/Product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/fc10a941-c563-6055-b745-a6e78509a423.jpeg" 
+             alt="Crème Deluxe" 
+             itemprop="image" />
+        <h2 itemprop="name">Crème Deluxe</h2>
+        <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="30.00">30,00</span>
+        </p>
+        <p><strong>Livraison incluse : <span itemprop="priceCurrency" content="EUR">€</span>1,50</strong></p> <!-- Note sur la livraison -->
         <button class="add-to-cart" data-product="Crème Deluxe" data-price="30.00" data-quantity="1">Ajouter au Panier</button>
     </div>
     
     <!-- Produit Exclusif : Fast Gaz (Livraison incluse à 2,00 €) -->
-    <div class="product">
-        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/719d7a89-c7d5-cadf-3240-3deacacf1407.jpeg" alt="Fast Gaz" />
-        <h2>Fast Gaz</h2>
-        <p>25,00 €</p>
-        <p><strong>Livraison incluse : 2,00 €</strong></p> <!-- Note sur la livraison -->
+    <div class="product" itemscope itemtype="http://schema.org/Product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/719d7a89-c7d5-cadf-3240-3deacacf1407.jpeg" 
+             alt="Fast Gaz" 
+             itemprop="image" />
+        <h2 itemprop="name">Fast Gaz</h2>
+        <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="25.00">25,00</span>
+        </p>
+        <p><strong>Livraison incluse : <span itemprop="priceCurrency" content="EUR">€</span>2,00</strong></p> <!-- Note sur la livraison -->
         <button class="add-to-cart" data-product="Fast Gaz" data-price="25.00" data-quantity="1">Ajouter au Panier</button>
     </div>
     
     <!-- Produit Exclusif : Tank (Livraison gratuite) -->
-    <div class="product">
-        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/4b02ba0e-b616-0f75-4710-58be6f2f3090.jpeg" alt="Tank" />
-        <h2>Tank</h2>
-        <p>45,00 €</p>
+    <div class="product" itemscope itemtype="http://schema.org/Product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/4b02ba0e-b616-0f75-4710-58be6f2f3090.jpeg" 
+             alt="Tank" 
+             itemprop="image" />
+        <h2 itemprop="name">Tank</h2>
+        <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="45.00">45,00</span>
+        </p>
         <p><strong>Livraison gratuite</strong></p> <!-- Note sur la livraison -->
         <button class="add-to-cart" data-product="Tank" data-price="45.00" data-quantity="1">Ajouter au Panier</button>
     </div>
@@ -939,4 +954,4 @@ document.getElementById('exclusive-products-button').addEventListener('click', f
 });
     </script>
 </body>
-    </html>
+           </html>
