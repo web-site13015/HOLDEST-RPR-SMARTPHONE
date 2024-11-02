@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<meta name="ezoic-site-verification" content="dUi0qHEAQYu9hUhNH8GdSVbWfsYqZP" />
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brochettes Street Shop</title>
@@ -333,6 +334,10 @@ h1 {
 
 
 
+
+
+
+
 /* Style pour le message d'ouverture */
 .open-notice {
     display: none; /* Caché par défaut */
@@ -408,6 +413,24 @@ h1 {
 /* Effet de zoom au survol de l'image */
 .responsive-image:hover {
     transform: scale(1.05); /* Légère augmentation de la taille au survol */
+}
+
+
+
+a {
+    display: inline-block; /* Permet de traiter le lien comme un bloc */
+    text-decoration: none; /* Enlève le soulignement du lien */
+}
+
+a img {
+    max-width: 100%; /* Fait en sorte que l'image ne dépasse jamais la largeur de son conteneur */
+    height: auto; /* Maintient le ratio de l'image */
+    border-radius: 8px; /* Arrondit les coins de l'image */
+    transition: transform 0.3s ease; /* Ajoute une animation lors du survol */
+}
+
+a:hover img {
+    transform: scale(1.05); /* Agrandit légèrement l'image au survol */
 }
 </style>
 </head>
@@ -535,6 +558,11 @@ h1 {
     <button class="add-to-cart" data-product="Boisson" data-price="0" data-quantity="1" id="add-drink">Ajouter au Panier</button>
 </div>
      
+
+
+<a href="https://amzn.to/3YMAMtr">
+    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d025611e-6374-23f0-b683-bc795deb104e.jpg" alt="Bannière Produit" />
+</a>
 
 <!-- PUFFs -->
 <div class="product" itemscope itemtype="http://schema.org/Product">
@@ -954,4 +982,4 @@ document.getElementById('exclusive-products-button').addEventListener('click', f
 });
     </script>
 </body>
-           </html>
+               </html>
