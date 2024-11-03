@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -247,8 +248,6 @@ h1 {
         }
         
 
-
-
 /* Styles pour le bouton "Produits Exclusifs" */
 #exclusive-products-button {
     background: linear-gradient(135deg, #6a0dad, #00b300); /* Dégradé violet vers vert */
@@ -448,6 +447,53 @@ a img {
 a:hover img {
     transform: scale(1.05); /* Agrandit légèrement l'image au survol */
 }
+  
+  
+  
+ 
+
+
+
+
+/* Style du carrousel */
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: auto;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+    user-select: none;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
 </style>
 </head>
 <body>
@@ -471,44 +517,70 @@ a:hover img {
 <button id="exclusive-products-button" class="exclusive-button">Produits Exclusifs</button>
 
 <main>
-    <section class="products">
-        <div class="product" itemscope itemtype="http://schema.org/Product">
-            <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" itemprop="image" />
-            <h2 itemprop="name">Samoussa 🥟</h2>
-            <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                <span itemprop="priceCurrency" content="EUR">€</span>
-                <span itemprop="price" content="5.50">5,50</span> les 6 pièces
-                <link itemprop="availability" href="http://schema.org/InStock" />
-            </p>
+   <section class="products">
+    <div class="product" itemscope itemtype="http://schema.org/Product">
+      
+      <!-- Début du carrousel pour Samoussa -->
+<div class="carousel" id="carousel-samoussa">
+    <!-- Flèche gauche -->
+    <a class="prev" onclick="plusSlides(-1, 'carousel-samoussa')">&#10094;</a>
 
-            <label for="samoussa-type">Choisissez un type de samoussa :</label>
-            <select id="samoussa-type">
-                <option value="">--Sélectionner--</option>
-                <option value="viande">Viande 🍖</option>
-                <option value="poisson">Poisson 🐟</option>
-                <option value="légumes">Légumes 🥕</option>
-            </select>
+   <!-- Images du produit Samoussa -->
+    <div class="carousel-images">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa 1" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/fcfe9885-ebc5-fd35-8ce2-cd4945d99d1d.jpg" alt="Samoussa 2" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/ac9cf34b-2916-f7ca-5ea3-41b721238cf9.png" alt="Samoussa 3" class="slide" />
+    </div>
 
-            <label for="samoussa-canette">Choisir une canette (si désirée) :</label>
-            <select id="samoussa-canette">
-                <option value="0">--Pas de canette--</option>
-                <option value="1.50">Canette Coca 🥤 (1,50 €)</option>
-                <option value="1.50">Canette Sprite 🥤 (1,50 €)</option>
-                <option value="1.50">Canette Fanta 🥤 (1,50 €)</option>
-                
-                 <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
-            </select>
-
-           
-        </div>
-    
-    <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
+    <!-- Flèche droite -->
+    <a class="next" onclick="plusSlides(1, 'carousel-samoussa')">&#10095;</a>
 </div>
-  <!-- Brochette -->
+<!-- Fin du carrousel -->
+      <h2 itemprop="name">Samoussa 🥟</h2>
+        <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <span itemprop="priceCurrency" content="EUR">€</span>
+            <span itemprop="price" content="5.50">5,50</span> les 6 pièces
+            <link itemprop="availability" href="http://schema.org/InStock" />
+        </p>
+
+        <label for="samoussa-type">Choisissez un type de samoussa :</label>
+        <select id="samoussa-type">
+            <option value="">--Sélectionner--</option>
+            <option value="viande" data-product-id="samoussa-viande">Viande 🍖</option>
+            <option value="poisson" data-product-id="samoussa-poisson">Poisson 🐟</option>
+            <option value="légumes" data-product-id="samoussa-légumes">Légumes 🥕</option>
+        </select>
+
+        <label for="samoussa-canette">Choisir une canette (si désirée) :</label>
+        <select id="samoussa-canette">
+            <option value="0" data-product-id="no-canette">--Pas de canette--</option>
+            <option value="1.50" data-product-id="canette-coca">Canette Coca 🥤 (1,50 €)</option>
+            <option value="1.50" data-product-id="canette-sprite">Canette Sprite 🥤 (1,50 €)</option>
+            <option value="1.50" data-product-id="canette-fanta">Canette Fanta 🥤 (1,50 €)</option>
+        </select>
+
+        <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1" id="addToCartButton">Ajouter au Panier</button>
+    </div>
+
+
+<!-- Brochette -->
 <div class="product" itemscope itemtype="http://schema.org/Product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" 
-         alt="Brochette de Poulet" 
-         itemprop="image" />
+   <!-- Début du carrousel pour Brochette -->
+<div class="carousel" id="carousel-brochette">
+    <!-- Flèche gauche -->
+    <a class="prev" onclick="plusSlides(-1, 'carousel-brochette')">&#10094;</a>
+
+    <!-- Images du produit Brochette -->
+    <div class="carousel-images">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/0dccd047-b743-f939-7166-d5043e1952fc.jpg" alt="Brochette 1" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/a329050c-c10a-2100-69e9-aebecf1598cc.png" alt="Brochette 2" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/5c3caa1b-7c11-0140-1b3d-7adb91a19f70.jpeg" alt="Brochette 3" class="slide" />
+    </div>
+
+    <!-- Flèche droite -->
+    <a class="next" onclick="plusSlides(1, 'carousel-brochette')">&#10095;</a>
+</div>
+<!-- Fin du carrousel -->
     <h2 itemprop="name">Brochette 🍢</h2>
     <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <span itemprop="priceCurrency" content="EUR">€</span>
@@ -518,73 +590,102 @@ a:hover img {
     
     <label for="brochette-type">Type de brochette :</label>
     <select id="brochette-type">
-        <option value="">Choisissez...</option>
-        <option value="Poulet">Brochette de Poulet 🍗</option>
-        <option value="Viande">Brochette de Viande Halal 🥩</option>
-        <option value="Crevettes">Brochette de Crevettes 🦐</option>
+        <option value="" data-product-id="brochette-aucun">Choisissez...</option>
+        <option value="Poulet" data-product-id="brochette-poulet">Brochette de Poulet 🍗</option>
+        <option value="Viande" data-product-id="brochette-viande">Brochette de Viande Halal 🥩</option>
+        <option value="Crevettes" data-product-id="brochette-crevettes">Brochette de Crevettes 🦐</option>
     </select>
 
     <label for="brochette-option">Choisissez un supplément :</label>
     <select id="brochette-option">
-        <option value="0">Aucun</option>
-        <option value="2.50">Riz 🍚 (+2,50 €)</option>
-        <option value="2.50">Frites 🍟 (+2,50 €)</option>
-        <option value="2.50">Manioc 🍠 (+2,50 €)</option>
-        <option value="2.50">Banane 🍌 (+2,50 €)</option>
+        <option value="0" data-product-id="supplement-aucun">Aucun</option>
+        <option value="2.50" data-product-id="supplement-riz">Riz 🍚 (+2,50 €)</option>
+        <option value="2.50" data-product-id="supplement-frites">Frites 🍟 (+2,50 €)</option>
+        <option value="2.50" data-product-id="supplement-manioc">Manioc 🍠 (+2,50 €)</option>
+        <option value="2.50" data-product-id="supplement-banane">Banane 🍌 (+2,50 €)</option>
     </select>
 
     <label for="brochette-canette">Ajoutez une boisson pour 1 € :</label>
     <select id="brochette-canette">
-        <option value="0">Aucune</option>
-        <option value="1">Coca 🥤 (+1 €)</option>
-        <option value="1">Sprite 🥤 (+1 €)</option>
-        <option value="1">Fanta 🥤 (+1 €)</option>
+        <option value="0" data-product-id="boisson-aucune">Aucune</option>
+        <option value="1" data-product-id="boisson-coca">Coca 🥤 (+1 €)</option>
+        <option value="1" data-product-id="boisson-sprite">Sprite 🥤 (+1 €)</option>
+        <option value="1" data-product-id="boisson-fanta">Fanta 🥤 (+1 €)</option>
     </select>
 
     <button class="add-to-cart" data-product="Brochette" data-price="6.50" data-quantity="1" id="add-brochette">Ajouter au Panier</button>
-</div>   
-            
+</div>
+  
 
-     <!-- Boissons -->
+ <!-- Boissons -->
 <div class="product" itemscope itemtype="http://schema.org/Product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" 
-         alt="Boissons Canette" 
-         itemprop="image" />
+<!-- Début du carrousel pour Boissons -->
+<div class="carousel" id="carousel-boisson">
+    <a class="prev" onclick="plusSlides(-1, 'carousel-boisson')">&#10094;</a>
+    <div class="carousel-images">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/86bece0d-ffa2-77e8-c70c-0ff34c36f319.jpeg" alt="Boisson 1" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/18ca2b7a-6085-7682-0760-3791096967b6.jpeg" alt="Boisson 2" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/dc162b51-78bc-0c0b-bc7e-e058514c7e7e.jpeg" alt="Boisson 3" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/ce0ef099-d4fc-20a1-e074-7c0707aae237.jpeg" alt="Boisson 4" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9a62fd6-6faa-2c1d-d885-9fc764ff8dde.jpeg" alt="Boisson 5" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b8115faa-40ff-fba9-fb77-6b23afc9362b.jpeg" alt="Boisson 6" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/38caff65-3501-44ee-059f-09aa4bd0118f.jpeg" alt="Boisson 7" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/09f52d41-1b06-d326-70c5-bcba96e4f93f.jpeg" alt="Boisson 8" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b57b7835-5af2-a499-facf-ae3a53e90fbd.jpeg" alt="Boisson 9" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/ca69c7ca-b0b6-c288-fc1e-eca967f60cca.jpg" alt="Boisson 10" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/09ad37ed-2998-da08-553d-edc009290e07.jpeg" alt="Boisson 11" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/32cd94d3-c017-a860-154d-bdbcf3c62b61.jpeg" alt="Boisson 12" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/eff50113-b102-2382-52bf-e9d7b636dbdd.jpeg" alt="Boisson 13" class="slide" />
+    </div>
+    <a class="next" onclick="plusSlides(1, 'carousel-boisson')">&#10095;</a>
+</div>
+<!-- Fin du carrousel pour Boissons -->
     <h2 itemprop="name">Boisson, Drink et Gourmandise 🥤</h2>
     <p itemprop="description">Choisissez parmi notre sélection de boissons et gourmandises.</p>
     
     <label for="drink-select">Choisissez une boisson :</label>
     <select id="drink-select">
-        <option value="">-- Sélectionner --</option>
-        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Coca 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
-        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Sprite 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
-        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Fanta 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
-        <option value="3" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Red Bull 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="3">3</span></option>
+        <option value="" data-product-id="boisson-aucune">-- Sélectionner --</option>
+        <option value="2" data-product-id="boisson-coca" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Coca 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
+        <option value="2" data-product-id="boisson-sprite" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Sprite 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
+        <option value="2" data-product-id="boisson-fanta" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Fanta 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
+        <option value="3" data-product-id="boisson-redbull" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Red Bull 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="3">3</span></option>
     </select>
 
     <label for="gourmandise-select">Choisissez une gourmandise :</label>
     <select id="gourmandise-select">
-        <option value="">-- Sélectionner --</option>
-        <option value="4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Chips 🍟 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="4">4</span></option>
-        <option value="5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Barre Chocolat 🍫 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="5">5</span></option>
-        <option value="6" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Gâteau 🍰 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="6">6</span></option>
-        <option value="7" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Bonbons 🍬 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="7">7</span></option>
+        <option value="" data-product-id="gourmandise-aucune">-- Sélectionner --</option>
+        <option value="4" data-product-id="gourmandise-chips" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Chips 🍟 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="4">4</span></option>
+        <option value="5" data-product-id="gourmandise-chocolat" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Barre Chocolat 🍫 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="5">5</span></option>
+        <option value="6" data-product-id="gourmandise-gateau" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Gâteau 🍰 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="6">6</span></option>
+        <option value="7" data-product-id="gourmandise-bonbons" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Bonbons 🍬 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="7">7</span></option>
     </select>
 
     <button class="add-to-cart" data-product="Boisson" data-price="0" data-quantity="1" id="add-drink">Ajouter au Panier</button>
 </div>
      
-
-
 <a href="https://amzn.to/3YMAMtr">
     <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d025611e-6374-23f0-b683-bc795deb104e.jpg" alt="Bannière Produit" />
 </a>
 
 <!-- PUFFs -->
 <div class="product" itemscope itemtype="http://schema.org/Product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/77789d81-33bb-1fd3-2e01-029135c6d09b.jpg" 
-         alt="PUFFs Électroniques" 
-         itemprop="image" />
+    <!-- Début du carrousel pour PUFFs Électroniques -->
+<div class="carousel" id="carousel-puffs">
+    <!-- Flèche gauche -->
+    <a class="prev" onclick="plusSlides(-1, 'carousel-puffs')">&#10094;</a>
+
+    <!-- Images du produit PUFFs Électroniques -->
+    <div class="carousel-images">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/77789d81-33bb-1fd3-2e01-029135c6d09b.jpg" alt="PUFF 1" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/e2103ead-abff-3935-2e72-5e46503f00b4.jpeg" alt="PUFF 2" class="slide" />
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/5ace1e36-6d11-e0e6-d983-d5e725ad6f36.jpg" alt="PUFF 3" class="slide" />
+    </div>
+
+    <!-- Flèche droite -->
+    <a class="next" onclick="plusSlides(1, 'carousel-puffs')">&#10095;</a>
+</div>
+<!-- Fin du carrousel -->
     <h2 itemprop="name">PUFFs 🫧</h2>
     <p itemprop="description">PUFFs à partir de <span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></span></p>
 
@@ -616,10 +717,7 @@ a:hover img {
     <!-- Bouton d'ajout au panier -->
     <button class="add-to-cart" data-product="PUFF" data-price="15" data-quantity="1" id="add-puffs">Ajouter au Panier</button>
 </div>
-       
-
-
-    
+         
 <section class="exclusive-products" id="exclusive-products" style="display: none;">
     <h2>Produits Exclusifs 🌟</h2>
     
@@ -681,8 +779,7 @@ a:hover img {
 </form>
         </aside>
 </main>
-        
-        
+               
         <aside class="cart" id="cart">
             <h2>Panier 🛒</h2>
             <div class="cart-items" id="cart-items"></div>
@@ -711,7 +808,6 @@ a:hover img {
     </div>
 </div>
 
-
  <div id="social-sharing">
         <div id="social-sharing" class="a2a_kit a2a_kit_size_32 a2a_floating_style a2a_vertical_style" style="left:0px; top:150px;">
             <a class="a2a_button_snapchat" href="https://web-site13015.github.io/brochette_street_shop/"></a>
@@ -720,25 +816,7 @@ a:hover img {
             <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
         </div>
     </div>
-<script>
-   snaptr('track', 'AD_CLICK', {
-      'uuid_c1': '12345',
-      'price': 49.99,
-      'transaction_id': 'ABC12345',
-      'item_category': 'Electronics',
-      'brands': ['BrandA', 'BrandB'],
-      'customer_status': 'new',
-      'delivery_method': 'standard',
-      'event_tag': 'sale',
-      'number_items': 1,
-      'description': 'Headphones',
-      'success': 1,
-      'user_email': 'user@example.com',
-      'user_phone_number': '1234567890',
-      'user_hashed_email': 'hashed_email_value',
-      'user_hashed_phone_number': 'hashed_phone_value'
-   });
-</script>
+
     <script async src="https://static.addtoany.com/menu/page.js"></script>
 
     <script>
@@ -756,8 +834,6 @@ a:hover img {
             lastScrollTop = st;
         });
         
-
-
 
 
 // Fonction pour vérifier si l'heure actuelle est dans les heures d'ouverture
@@ -1003,9 +1079,6 @@ cartToggleButton.addEventListener('click', () => {
 
 
 
-
-
-
 // Ajout de l'événement pour afficher les produits exclusifs et faire défiler jusqu'à eux
 document.getElementById('exclusive-products-button').addEventListener('click', function() {
     const exclusiveSection = document.getElementById('exclusive-products');
@@ -1014,6 +1087,47 @@ document.getElementById('exclusive-products-button').addEventListener('click', f
     // Faire défiler jusqu'à la section des produits exclusifs
     exclusiveSection.scrollIntoView({ behavior: 'smooth' });
 });
+  
+  
+      
+    
+    
+function plusSlides(n, carouselId) {
+    const slides = document.querySelectorAll(`#${carouselId} .slide`);
+    let currentSlideIndex = 0;
+    
+    // Trouver l'index actuel
+    slides.forEach((slide, index) => {
+        if (slide.style.display !== 'none') {
+            currentSlideIndex = index;
+        }
+    });
+
+    // Calculer le nouvel index
+    currentSlideIndex += n;
+    const totalSlides = slides.length;
+
+    // Gérer les limites
+    if (currentSlideIndex >= totalSlides) {
+        currentSlideIndex = 0; // Retour à la première image
+    } else if (currentSlideIndex < 0) {
+        currentSlideIndex = totalSlides - 1; // Retour à la dernière image
+    }
+
+    // Afficher la bonne image
+    slides.forEach((slide, index) => {
+        slide.style.display = (index === currentSlideIndex) ? 'block' : 'none';
+    });
+}
+
+// Initialiser le carrousel
+document.querySelectorAll('.carousel-images .slide').forEach(slide => {
+    slide.style.display = 'none'; // Cacher toutes les images au départ
+});
+document.querySelectorAll('.carousel').forEach(carousel => {
+    carousel.querySelector('.slide').style.display = 'block'; // Afficher la première image
+});
+  
     </script>
 </body>
                </html>
