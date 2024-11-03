@@ -456,80 +456,53 @@ a:hover img {
 
 <main>
     <section class="products">
-        <div class="product" itemscope itemtype="http://schema.org/Product">
-            <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" itemprop="image" />
-            <h2 itemprop="name">Samoussa 🥟</h2>
-            <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                <span itemprop="priceCurrency" content="EUR">€</span>
-                <span itemprop="price" content="5.50">5,50</span> les 6 pièces
-                <link itemprop="availability" href="http://schema.org/InStock" />
-            </p>
+    <div class="product" itemscope itemtype="http://schema.org/Product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/886124cc-a97b-7067-e285-0b32d38b320b.jpeg" alt="Samoussa" itemprop="image" />
+        <h2 itemprop="name">Samoussa 🥟</h2>
+        <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <span itemprop="priceCurrency" content="EUR">€</span>
+            <span itemprop="price" content="5.50">5,50</span> les 6 pièces
+            <link itemprop="availability" href="http://schema.org/InStock" />
+        </p>
+        
+        <label for="samoussa-type">Choisissez un type de samoussa :</label>
+        <select id="samoussa-type">
+            <option value="">--Sélectionner--</option>
+            <option value="viande">Viande 🍖</option>
+            <option value="poisson">Poisson 🐟</option>
+            <option value="légumes">Légumes 🥕</option>
+        </select>
 
-            <label for="samoussa-type">Choisissez un type de samoussa :</label>
-            <select id="samoussa-type">
-                <option value="">--Sélectionner--</option>
-                <option value="viande">Viande 🍖</option>
-                <option value="poisson">Poisson 🐟</option>
-                <option value="légumes">Légumes 🥕</option>
-            </select>
+        <button class="add-to-cart" data-product="Samoussa" data-price="5.50">Ajouter au Panier</button>
+    </div>
 
-            <label for="samoussa-canette">Choisir une canette (si désirée) :</label>
-            <select id="samoussa-canette">
-                <option value="0">--Pas de canette--</option>
-                <option value="1.50">Canette Coca 🥤 (1,50 €)</option>
-                <option value="1.50">Canette Sprite 🥤 (1,50 €)</option>
-                <option value="1.50">Canette Fanta 🥤 (1,50 €)</option>
-                
-                 <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
-            </select>
+    <div class="product">
+        <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" alt="Brochette de Poulet" />
+        <h2>Brochette 🍢</h2>
+        <p>Menu à 6,50 €</p>
 
-           
-        </div>
-    
-    <button class="add-to-cart" data-product="Samoussa" data-price="5.50" data-quantity="1">Ajouter au Panier</button>
-</div>
-  <!-- Brochette -->
-<div class="product" itemscope itemtype="http://schema.org/Product">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/b4a00c7f-0423-80b4-0fe0-ebaab753db74.jpeg" 
-         alt="Brochette de Poulet" 
-         itemprop="image" />
-    <h2 itemprop="name">Brochette 🍢</h2>
-    <p itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-        <span itemprop="priceCurrency" content="EUR">€</span>
-        <span itemprop="price" content="6.50">6,50</span> (Menu)
-        <link itemprop="availability" href="http://schema.org/InStock" />
-    </p>
-    
-    <label for="brochette-type">Type de brochette :</label>
-    <select id="brochette-type">
-        <option value="">Choisissez...</option>
-        <option value="Poulet">Brochette de Poulet 🍗</option>
-        <option value="Viande">Brochette de Viande Halal 🥩</option>
-        <option value="Crevettes">Brochette de Crevettes 🦐</option>
-    </select>
+        <label for="brochette-type">Type de brochette :</label>
+        <select id="brochette-type">
+            <option value="">Choisissez...</option>
+            <option value="Poulet">Brochette de Poulet 🍗</option>
+            <option value="Viande">Brochette de Viande Halal 🥩</option>
+            <option value="Crevettes">Brochette de Crevettes 🦐</option>
+        </select>
+        
+        <label for="brochette-option">Choisissez un supplément :</label>
+        <select id="brochette-option">
+            <option value="0">Aucun</option>
+            <option value="2.50">Riz 🍚 (+2,50 €)</option>
+            <option value="2.50">Frites 🍟 (+2,50 €)</option>
+            <option value="2.50">Manioc 🍠 (+2,50 €)</option>
+            <option value="2.50">Banane 🍌 (+2,50 €)</option>
+        </select>
 
-    <label for="brochette-option">Choisissez un supplément :</label>
-    <select id="brochette-option">
-        <option value="0">Aucun</option>
-        <option value="2.50">Riz 🍚 (+2,50 €)</option>
-        <option value="2.50">Frites 🍟 (+2,50 €)</option>
-        <option value="2.50">Manioc 🍠 (+2,50 €)</option>
-        <option value="2.50">Banane 🍌 (+2,50 €)</option>
-    </select>
+        <button class="add-to-cart" data-product="Brochette" data-price="6.50">Ajouter au Panier</button>
+    </div>
+</section>
 
-    <label for="brochette-canette">Ajoutez une boisson pour 1 € :</label>
-    <select id="brochette-canette">
-        <option value="0">Aucune</option>
-        <option value="1">Coca 🥤 (+1 €)</option>
-        <option value="1">Sprite 🥤 (+1 €)</option>
-        <option value="1">Fanta 🥤 (+1 €)</option>
-    </select>
-
-    <button class="add-to-cart" data-product="Brochette" data-price="6.50" data-quantity="1" id="add-brochette">Ajouter au Panier</button>
-</div>   
-            
-
-     <!-- Boissons -->
+ <!-- Boissons -->
 <div class="product" itemscope itemtype="http://schema.org/Product">
     <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d9e3f57b-2ad5-6a1a-df84-57c2d2e0a45d.jpeg" 
          alt="Boissons Canette" 
@@ -540,29 +513,23 @@ a:hover img {
     <label for="drink-select">Choisissez une boisson :</label>
     <select id="drink-select">
         <option value="">-- Sélectionner --</option>
-        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Coca 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
-        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Sprite 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
-        <option value="2" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Fanta 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="2">2</span></option>
-        <option value="3" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Red Bull 🥤 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="3">3</span></option>
+        <option value="2" data-price="2">Coca 🥤 - €2</option>
+        <option value="2" data-price="2">Sprite 🥤 - €2</option>
+        <option value="2" data-price="2">Fanta 🥤 - €2</option>
+        <option value="3" data-price="3">Red Bull 🥤 - €3</option>
     </select>
 
     <label for="gourmandise-select">Choisissez une gourmandise :</label>
     <select id="gourmandise-select">
         <option value="">-- Sélectionner --</option>
-        <option value="4" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Chips 🍟 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="4">4</span></option>
-        <option value="5" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Barre Chocolat 🍫 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="5">5</span></option>
-        <option value="6" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Gâteau 🍰 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="6">6</span></option>
-        <option value="7" itemprop="offers" itemscope itemtype="http://schema.org/Offer">Bonbons 🍬 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="7">7</span></option>
+        <option value="4" data-price="4">Chips 🍟 - €4</option>
+        <option value="5" data-price="5">Barre Chocolat 🍫 - €5</option>
+        <option value="6" data-price="6">Gâteau 🍰 - €6</option>
+        <option value="7" data-price="7">Bonbons 🍬 - €7</option>
     </select>
 
-    <button class="add-to-cart" data-product="Boisson" data-price="0" data-quantity="1" id="add-drink">Ajouter au Panier</button>
+    <button class="add-to-cart" data-product="Boisson" data-price="0">Ajouter au Panier</button>
 </div>
-     
-
-
-<a href="https://amzn.to/3YMAMtr">
-    <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/d025611e-6374-23f0-b683-bc795deb104e.jpg" alt="Bannière Produit" />
-</a>
 
 <!-- PUFFs -->
 <div class="product" itemscope itemtype="http://schema.org/Product">
@@ -570,38 +537,32 @@ a:hover img {
          alt="PUFFs Électroniques" 
          itemprop="image" />
     <h2 itemprop="name">PUFFs 🫧</h2>
-    <p itemprop="description">PUFFs à partir de <span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></span></p>
+    <p itemprop="description">PUFFs à partir de <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></p>
 
-    <!-- Sélection de modèle à 9000 bouffées - 15 € -->
     <label for="puffs-type">Choisissez un modèle (9000 bouffées - 15 €) :</label>
     <select id="puffs-type">
         <option value="">-- Sélectionner --</option>
-        <option value="15" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Mangue 🥭 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></option>
-        <option value="15" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Fraise 🍓 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="15">15</span></option>
+        <option value="15" data-price="15">PUFF Mangue 🥭 - €15</option>
+        <option value="15" data-price="15">PUFF Fraise 🍓 - €15</option>
     </select>
 
-    <!-- Supplément : 15000 bouffées à 20 € -->
     <label for="puffs-option">Choisissez un modèle 15000 bouffées (20 €) :</label>
     <select id="puffs-option">
         <option value="0">Aucun supplément</option>
-        <option value="20" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Pastèque 🍉 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="20">20</span></option>
-        <option value="20" itemprop="offers" itemscope itemtype="http://schema.org/Offer">PUFF Menthe 🍃 - <span itemprop="priceCurrency" content="EUR">€</span><span itemprop="price" content="20">20</span></option>
+        <option value="20" data-price="20">PUFF Pastèque 🍉 - €20</option>
+        <option value="20" data-price="20">PUFF Menthe 🍃 - €20</option>
     </select>
 
-    <!-- Ajout boisson à 1 € -->
     <label for="puffs-drink">Ajoutez une boisson pour 1 € :</label>
     <select id="puffs-drink">
         <option value="0">Aucune</option>
-        <option value="1">Coca 🥤 (+1 €)</option>
-        <option value="1">Sprite 🥤 (+1 €)</option>
-        <option value="1">Fanta 🥤 (+1 €)</option>
+        <option value="1" data-price="1">Coca 🥤 (+1 €)</option>
+        <option value="1" data-price="1">Sprite 🥤 (+1 €)</option>
+        <option value="1" data-price="1">Fanta 🥤 (+1 €)</option>
     </select>
 
-    <!-- Bouton d'ajout au panier -->
-    <button class="add-to-cart" data-product="PUFF" data-price="15" data-quantity="1" id="add-puffs">Ajouter au Panier</button>
+    <button class="add-to-cart" data-product="PUFF" data-price="15">Ajouter au Panier</button>
 </div>
-       
-
 
     
 <section class="exclusive-products" id="exclusive-products" style="display: none;">
@@ -981,5 +942,49 @@ document.getElementById('exclusive-products-button').addEventListener('click', f
     exclusiveSection.scrollIntoView({ behavior: 'smooth' });
 });
     </script>
+
+<script>
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+            var productName = this.getAttribute('data-product');  // Récupère le nom du produit
+            var basePrice = parseFloat(this.getAttribute('data-price'));  // Récupère le prix de base
+            var totalPrice = basePrice; // Commence par le prix de base
+
+            // Gestion des boissons
+            if (productName === "Boisson") {
+                var drinkSelect = document.getElementById('drink-select');
+                var selectedDrinkPrice = parseFloat(drinkSelect.options[drinkSelect.selectedIndex].getAttribute('data-price')) || 0;
+                
+                var gourmandiseSelect = document.getElementById('gourmandise-select');
+                var selectedGourmandisePrice = parseFloat(gourmandiseSelect.options[gourmandiseSelect.selectedIndex].getAttribute('data-price')) || 0;
+
+                totalPrice += selectedDrinkPrice + selectedGourmandisePrice; // Ajoute le prix des boissons et gourmandises
+            }
+
+            // Gestion des PUFFs
+            if (productName === "PUFF") {
+                var puffsTypeSelect = document.getElementById('puffs-type');
+                var selectedPuffPrice = parseFloat(puffsTypeSelect.options[puffsTypeSelect.selectedIndex].getAttribute('data-price')) || 0;
+
+                var puffsOptionSelect = document.getElementById('puffs-option');
+                var selectedPuffsOptionPrice = parseFloat(puffsOptionSelect.options[puffsOptionSelect.selectedIndex].getAttribute('data-price')) || 0;
+
+                var puffsDrinkSelect = document.getElementById('puffs-drink');
+                var selectedPuffsDrinkPrice = parseFloat(puffsDrinkSelect.options[puffsDrinkSelect.selectedIndex].getAttribute('data-price')) || 0;
+
+                totalPrice += selectedPuffPrice + selectedPuffsOptionPrice + selectedPuffsDrinkPrice; // Ajoute tous les prix
+            }
+
+            // Envoie à Snapchat
+            snaptr('track', 'AD_CLICK', {
+                'price': totalPrice,  // Prix total
+                'description': productName + (productName === "PUFF" ? ' avec supplément' : ''),  // Nom du produit et supplément
+                'success': 1  // Indique le succès
+            });
+
+            alert(productName + ' a été ajouté au panier ! Prix total : €' + totalPrice.toFixed(2));  // Message de confirmation
+        });
+    });
+</script>
 </body>
                </html>
