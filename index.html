@@ -251,7 +251,7 @@
         <a href="#contact">Contact</a>
     </div>
     <section class="hero-section">
-        <h1>Bienvenue dans mon univers – Elams 🎵</h1>
+        <h1>Bienvenue dans mon univers – Elams </h1>
     </section>
 
     <div class="sections">
@@ -284,12 +284,14 @@
                     <iframe src="https://1drv.ms/v/c/26b872b82d8d84f5/IQTuxduOnTzfSIS5HFAUrjE4AQOGozhPj21Kgt9XMmY3jqc" width="329" height="245" frameborder="0" scrolling="no" allowfullscreen></iframe>
                     <a href="#" onclick="addToCart('Elams bella bella', 25, event)">Ajouter au panier</a>
                 </div>
+                
                 <div class="music-card">
                     <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/23854019-86d9-5b02-5803-7c6cbae477e1.jpeg" alt="Album 3">
                     <h3>Elams artiste 🎵</h3>
-                    <iframe src="https://1drv.ms/v/c/26b872b82d8d84f5/IQS5Vsd7jNKqS76DzvK3yrxmAamU9kQX5qEmwHgf1WU2aIA" width="329" height="245" frameborder="0" scrolling="no" allowfullscreen></iframe>
-                    <a href="#" onclick="addToCart('Croco marécage', 10, event)">Ajouter au panier</a>
+                      <iframe src="https://1drv.ms/v/c/26b872b82d8d84f5/IQSV-wMP0xraRZeEEGmDH1x-ARNxOxxpm3Ph8bDMBd8TiUQ" width="329" height="245" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    <a href="#" onclick="addToCart('Croco marecage', 25, event)">Ajouter au panier</a>
                 </div>
+                
             </div>
         </section>
 
@@ -300,14 +302,14 @@
                 <div class="music-card">
                     <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/1398be0f-5344-5bb1-3b30-2d3d06cb2d3e.jpg" alt="pull">
                     <h3>Pull Officiel Elams</h3>
-                    <p>Prix : 25€</p>
-                    <a href="#" onclick="addToCart('T-shirt Officiel Elams', 25, event)">Ajouter au panier</a>
+                    <p>Prix : 60€</p>
+                    <a href="#" onclick="addToCart('Pull Officiel Elams', 60, event)">Ajouter au panier</a>
                 </div>
                 <div class="music-card">
                     <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/05a3143b-80fe-7f2e-96ac-c7e4c83c4229.jpg" alt="Casquette">
-                    <h3>Casquette Quartier</h3>
-                    <p>Prix : 20€</p>
-                    <a href="#" onclick="addToCart('Casquette Quartier', 20, event)">Ajouter au panier</a>
+                    <h3>Casquette Quartier noir </h3>
+                    <p>Prix : 35€</p>
+                    <a href="#" onclick="addToCart('Casquette Quartier noir', 35, event)">Ajouter au panier</a>
                 </div>
             </div>
         </section>
@@ -325,11 +327,29 @@
         Panier
     </div>
     <div class="cart-content" id="cartContent">
-        <h3>Votre Panier</h3>
-        <ul id="cartItems"></ul>
-        <button class="close-btn" onclick="toggleCart()">Fermer</button>
-    </div>
+    <h3>Votre Panier</h3>
+    <ul id="cartItems"></ul>
+    <button class="finalize-btn" onclick="finalizeOrder()">Finaliser la commande</button>
+</div>
 
+<div id="deliveryForm" style="display: none; margin-top: 15px;">
+    <h3>Informations de livraison</h3>
+    <form id="orderForm" action="https://formspree.io/f/VOUS_FORM_ID" method="POST">
+        <label for="name">Nom complet :</label>
+        <input type="text" id="name" name="Nom" required style="width: 100%; margin-bottom: 10px;">
+
+        <label for="address">Adresse :</label>
+        <textarea id="address" name="Adresse" required style="width: 100%; margin-bottom: 10px;"></textarea>
+
+        <label for="phone">Téléphone :</label>
+        <input type="tel" id="phone" name="Téléphone" required style="width: 100%; margin-bottom: 10px;">
+
+        <!-- Champ masqué pour ajouter les articles du panier -->
+        <input type="hidden" id="cartSummary" name="Résumé du Panier">
+
+        <button type="submit" style="width: 100%; background-color: #d81e05; color: white; padding: 10px; border: none; border-radius: 5px;">Confirmer la commande</button>
+    </form>
+</div>
     <!-- JavaScript -->
     <script>
         let cart = [];
@@ -404,6 +424,24 @@
             }
         };
     
+   
+    
+   function finalizeOrder() {
+    const cartContent = document.getElementById("cartItems");
+    if (cart.length === 0) {
+        alert("Votre panier est vide. Ajoutez des produits avant de finaliser votre commande.");
+        return;
+    }
+
+    // Générer le résumé du panier
+    const cartSummary = cart.map(item => `${item.name} (x${item.quantity || 1}): ${item.price}€`).join("\n");
+    document.getElementById("cartSummary").value = cartSummary; // Mettre à jour le champ masqué
+
+    // Masquer les produits et afficher le formulaire
+    document.getElementById("cartContent").style.display = "none";
+    document.getElementById("deliveryForm").style.display = "block";
+} 
+       
       // Fonction pour afficher l'image en mode zoom
 function zoomImage(imageElement) {
     // Créer une div pour le zoom
@@ -442,7 +480,7 @@ document.querySelectorAll('.music-card img').forEach(image => {
     image.style.cursor = 'pointer'; // Change le curseur sur l'image
     image.onclick = function () {
         zoomImage(this); // Appelle la fonction zoomImage au clic
-    };
+    };v
 });
     </script>
 </body>
