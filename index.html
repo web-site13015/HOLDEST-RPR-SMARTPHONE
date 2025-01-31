@@ -3,456 +3,358 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salon de Beauté - Lissage et Ongles Professionnels</title>
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <title>Tana Land - Fil d'actualité</title>
+    
+    <!-- Lien vers Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f7f7f7;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        header {
-            background-color: #ff6f91;
+            background-color: #1e1e2f;
             color: white;
-            padding: 20px;
-            text-align: center;
-            font-family: 'Merriweather', serif;
-        }
-
-        nav {
-            text-align: center;
-            padding: 10px;
-            background-color: #ff4785;
-            font-family: 'Merriweather', serif;
-        }
-
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        nav a:hover {
-            background-color: white;
-            color: #ff4785;
-            border-radius: 5px;
-        }
-
-        section {
-            padding: 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
-
-        .service-card, .product-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
             text-align: center;
         }
 
-        .service-card img, .product-card img {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        .service-info, .product-info {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .service-info h2, .product-info h2 {
-            color: #ff4785;
-            font-size: 24px;
-            font-family: 'Merriweather', serif;
-        }
-
-        .service-info p, .product-info p {
-            color: #555;
-            line-height: 1.6;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .btn {
-            background-color: #ff4785;
+        h1 {
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
             color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 25px;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .btn:hover {
-            background-color: #ff6f91;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        form input, form textarea, form select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        form button {
-            width: 100%;
             padding: 15px;
-            background-color: #ff4785;
+            text-transform: uppercase;
+        }
+
+        .menu-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 30px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
             color: white;
+        }
+
+        .menu {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #2c2c3a;
+            padding: 20px;
+            transition: left 0.3s;
+            z-index: 1000; /* Ajouter un z-index élevé pour que le menu soit au-dessus des autres éléments */
+        }
+
+        .menu.open {
+            left: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        input, textarea {
+            width: 90%;
+            padding: 8px;
+            margin: 5px 0;
             border: none;
             border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
         }
 
-        form button:hover {
-            background-color: #ff6f91;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #ff4785;
+        button {
+            background: #ff8a00;
             color: white;
-            font-family: 'Poppins', sans-serif;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
-        /* Modal Styles */
+        button:hover {
+            background: #e52e71;
+        }
+
+        #news-container {
+            max-width: 900px;
+            margin: auto;
+            background: #2c2c3a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 138, 0, 0.3);
+            text-align: left;
+        }
+
+        .news-item {
+            background: #3a3a4a;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+
+        .news-item img, .news-item video {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        /* Fenêtre modale pour l'alerte */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1; 
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
             overflow: auto;
-            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
         }
 
         .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
+            background-color: #2c2c3a;
+            margin: 5% auto;
             padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 500px;
             border-radius: 10px;
+            width: 80%;
+            text-align: center;
         }
 
         .close {
-            color: #aaa;
+            color: white;
             float: right;
             font-size: 28px;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .close:hover,
         .close:focus {
-            color: #ff4785;
-            text-decoration: none;
-            cursor: pointer;
+            color: #ff8a00;
         }
 
-        /* Panier Styles */
-        #cart {
-            display: none;
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            background-color: #32cd32;
-            padding: 15px;
-            border-radius: 5px;
-            color: white;
+        .feedback {
+            font-size: 20px;
+            margin-top: 10px;
         }
 
-        .cart-items {
-            list-style: none;
-            padding: 0;
+        .feedback button {
+            margin: 5px;
+            font-size: 20px;
         }
 
-        .cart-items li {
-            margin-bottom: 5px;
-        }
-
-        /* Responsive Design */
-        @media (min-width: 768px) {
-            .service-card, .product-card {
-                flex-direction: row;
-                text-align: left;
-            }
-
-            .service-info, .product-info {
-                padding-left: 20px;
-            }
-        }
-
-        .about, .contact {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            background-color: #fff;
-        }
-
-        .about h2, .contact h2 {
-            color: #ff4785;
-            font-family: 'Merriweather', serif;
-        }
-
-        .opening-hours {
+        .choice-buttons {
             margin-top: 20px;
-            font-family: 'Poppins', sans-serif;
-            background-color: #f7f7f7;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
         }
 
-        .opening-hours h3 {
-            color: #ff4785;
-            font-family: 'Merriweather', serif;
+        .file-input-container {
+            margin-top: 15px;
         }
 
-        .opening-hours p {
-            color: #555;
-            line-height: 1.6;
-            font-family: 'Poppins', sans-serif;
+        .file-input-container button {
+            margin: 5px;
+        }
+
+        /* Widget RSS */
+        #rss-widget-container {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+            background: #2c2c3a;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .feedback-buttons {
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Salon de Beauté - Lissage et Ongles Professionnels</h1>
-    </header>
+    <h1>🔥 Tana Land - Fil d'actualité 🔥</h1>
 
-    <nav>
-        <a href="#services">Services</a>
-        <a href="#boutique" onclick="openBoutiqueModal()">Boutique</a>
-        <a href="#about" onclick="openAboutModal()">À propos</a>
-        <a href="#contact" onclick="openContactModal()">Contact</a>
-    </nav>
+    <!-- Bouton du menu -->
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
-    <section id="services">
-        <h2>Nos Services</h2>
+    <!-- Menu latéral -->
+    <div class="menu" id="menu">
+        <button class="menu-btn close" onclick="toggleMenu()">✖</button>
+        <h2>👤 Connexion</h2>
+        <input type="text" id="username" placeholder="Nom d'utilisateur" required>
+        <button onclick="login()">Se connecter</button>
+        
+        <div id="publish-section" class="hidden">
+            <h2>📢 Publier une actualité</h2>
+            <input type="text" id="title" placeholder="Titre de l'actualité">
+            <textarea id="description" placeholder="Description de l'actualité"></textarea>
 
-        <div class="service-card">
-            <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/360d82bf-1858-8e3f-34c9-02cb772c5599.jpeg" alt="Tresse Basique">
-            <div class="service-info">
-                <h2>Tresse Basique</h2>
-                <p>Des tresses simples, élégantes et abordables pour tous les types de cheveux. Démêlage inclus si nécessaire.</p>
-                <p><strong>Prix : 13 € - 25 €</strong></p>
-                <button class="btn" onclick="openReservationModal('Tresse Basique', '13 € - 25 €')">Réserver</button>
+            <div class="choice-buttons">
+                <button class="file-input-container" onclick="showImageOptions()"><i class="fas fa-image"></i> Choisir une image</button>
+                <button class="file-input-container" onclick="showVideoOptions()"><i class="fas fa-video"></i> Choisir une vidéo</button>
             </div>
-        </div>
 
-        <div class="service-card">
-            <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/3975ea6b-3a7b-606a-e304-c31ed93b6b78.jpeg" alt="Lissage Brésilien">
-            <div class="service-info">
-                <h2>Lissage Brésilien</h2>
-                <p>Profitez de notre lissage brésilien qui rend vos cheveux doux, soyeux et faciles à coiffer. Idéal pour des cheveux bouclés ou épais.</p>
-                <p><strong>Prix : 30 € - 45 €</strong></p>
-                <button class="btn" onclick="openReservationModal('Lissage Brésilien', '30 € - 45 €')">Réserver</button>
+            <div id="image-options" class="hidden">
+                <input type="file" id="image" accept="image/*" />
+                <p>Ou prenez une photo avec la caméra :</p>
+                <input type="file" id="image-camera" accept="image/*" capture="camera" />
             </div>
-        </div>
 
-        <!-- Ajouter d'autres services ici -->
+            <div id="video-options" class="hidden">
+                <input type="file" id="video" accept="video/*" />
+                <p>Ou filmez avec la caméra :</p>
+                <input type="file" id="video-camera" accept="video/*" capture="camera" />
+            </div>
 
-    </section>
-
-    <!-- Panier -->
-    <div id="cart">
-        <h3>Panier</h3>
-        <ul class="cart-items"></ul>
-        <button class="btn" onclick="checkout()">Commander</button>
-    </div>
-
-    <!-- Modal de réservation -->
-    <div id="reservationModal" class="modal">
-    <div class="modal-content">
-            <span class="close" onclick="closeReservationModal()">&times;</span>
-            <h2>Réserver un Service</h2>
-            <form id="reservationForm">
-                <input type="text" id="clientName" placeholder="Votre Nom" required>
-                <input type="email" id="clientEmail" placeholder="Votre Email" required>
-                <input type="text" id="clientPhone" placeholder="Votre Téléphone" required>
-                <input type="text" id="serviceName" readonly>
-                <input type="text" id="servicePrice" readonly>
-                <input type="datetime-local" id="appointmentDate" required>
-                <button type="submit">Confirmer la Réservation</button>
-            </form>
+            <button onclick="publishNews()">Publier</button>
         </div>
     </div>
 
-    <!-- Modal de la boutique -->
-    <div id="boutiqueModal" class="modal">
+    <!-- Fenêtre modale d'alerte -->
+    <div id="alertModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeBoutiqueModal()">&times;</span>
-            <h2>Jenna Boutique</h2>
-            <div class="product-card">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/7ff13caf-727e-4434-ce2f-bcdf863770c7.jpeg" alt="Produit 1">
-                <div class="product-info">
-                    <h2>Shampoing Hydratant</h2>
-                    <p>Un shampoing doux et hydratant pour tous les types de cheveux.</p>
-                    <p><strong>Prix : 15 €</strong></p>
-                    <button class="btn" onclick="addToCart('Shampoing Hydratant', '15 €')">Ajouter au Panier</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <img src="https://mcusercontent.com/40a9f1a77d46874eba2309d88/images/0f718b22-b08f-7025-a167-970294e19be0.jpeg" alt="Produit 2">
-                <div class="product-info">
-                    <h2>Masque Nourrissant</h2>
-                    <p>Un masque profond pour nourrir vos cheveux et leur redonner de l'éclat.</p>
-                    <p><strong>Prix : 20 €</strong></p>
-                    <button class="btn" onclick="addToCart('Masque Nourrissant', '20 €')">Ajouter au Panier</button>
-                </div>
-            </div>
-
-            <!-- Ajouter d'autres produits ici -->
-
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p>Connexion réussie !</p>
         </div>
     </div>
 
-    <!-- Modal À propos -->
-    <div id="aboutModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAboutModal()">&times;</span>
-            <h2>À propos de nous</h2>
-            <div class="about">
-                <p>Bienvenue au Salon de Beauté, votre destination pour des services de lissage et de manucure de qualité. Notre équipe est composée de professionnels passionnés par la beauté et le bien-être.</p>
-                <p>Nous nous engageons à fournir un service exceptionnel et à utiliser des produits de haute qualité pour garantir la satisfaction de nos clients.</p>
+    <!-- Conteneur de la file d'actualité -->
+    <div id="news-container">
+        <h2>🚀 Actualités</h2>
+        
+        <!-- Actualité par défaut -->
+        <div class="news-item">
+            <h3>🔥 Bienvenue sur Tana Land !</h3>
+            <p>Ceci est une actualité par défaut.</p>
+            <img src="https://mcusercontent.com/ecbcd3e0a3ef2c00dbcaefee8/images/c2f77817-7f68-e79a-2fae-b0df349226c2.jpg" alt="Image par défaut">
+            <div class="feedback-buttons">
+                <button onclick="addFeedback('👍')">👍</button>
+                <button onclick="addFeedback('🩷')">🩷</button>
             </div>
         </div>
-    </div>
 
-    <!-- Modal Contact -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeContactModal()">&times;</span>
-            <h2>Contactez-nous</h2>
-            <form id="contactForm">
-                <input type="text" id="contactName" placeholder="Votre Nom" required>
-                <input type="email" id="contactEmail" placeholder="Votre Email" required>
-                <textarea id="contactMessage" placeholder="Votre Message" required></textarea>
-                <button type="submit">Envoyer</button>
-            </form>
+        <!-- Nouvelles actualités publiées -->
+        <div id="custom-news"></div>
+        
+        <!-- Widget RSS -->
+        <div id="rss-widget-container">
+            <iframe 
+                src="https://rss.app/embed/v1/wall/EfaE5udOLeF3DdzP" 
+                frameborder="0">
+            </iframe>
         </div>
     </div>
-
-    <div class="opening-hours">
-        <h3>Heures d'Ouverture</h3>
-        <p>Lundi - Vendredi : 9h00 - 19h00</p>
-        <p>Samedi : 10h00 - 18h00</p>
-        <p>Dimanche : Fermé</p>
-    </div>
-
-    <footer>
-        <p>&copy; 2024 Salon de Beauté. Tous droits réservés.</p>
-    </footer>
 
     <script>
-        function openReservationModal(serviceName, servicePrice) {
-            document.getElementById("serviceName").value = serviceName;
-            document.getElementById("servicePrice").value = servicePrice;
-            document.getElementById("reservationModal").style.display = "block";
+        let currentUser = "";
+
+        // Ouvrir/fermer le menu latéral
+        function toggleMenu() {
+            let menu = document.getElementById("menu");
+            menu.classList.toggle("open");
         }
 
-        function closeReservationModal() {
-            document.getElementById("reservationModal").style.display = "none";
+        // Simuler une connexion
+        function login() {
+            let username = document.getElementById("username").value;
+            if (username.trim() !== "") {
+                currentUser = username;
+                showModal(); // Afficher la fenêtre modale
+                setTimeout(() => {
+                    closeModal();
+                }, 2000);
+                document.getElementById("publish-section").classList.remove("hidden");
+                toggleMenu(); // Fermer le menu après la connexion
+            } else {
+                alert("Veuillez entrer un nom d'utilisateur.");
+            }
         }
 
-        function openBoutiqueModal() {
-            document.getElementById("boutiqueModal").style.display = "block";
+        // Fonction pour afficher la fenêtre modale
+        function showModal() {
+            document.getElementById("alertModal").style.display = "block";
         }
 
-        function closeBoutiqueModal() {
-            document.getElementById("boutiqueModal").style.display = "none";
+        // Fonction pour fermer la fenêtre modale
+        function closeModal() {
+            document.getElementById("alertModal").style.display = "none";
         }
 
-        function openAboutModal() {
-            document.getElementById("aboutModal").style.display = "block";
+        // Fonction pour afficher les options d'image
+        function showImageOptions() {
+            document.getElementById("image-options").classList.remove("hidden");
+            document.getElementById("video-options").classList.add("hidden");
         }
 
-        function closeAboutModal() {
-            document.getElementById("aboutModal").style.display = "none";
+        // Fonction pour afficher les options de vidéo
+        function showVideoOptions() {
+            document.getElementById("video-options").classList.remove("hidden");
+            document.getElementById("image-options").classList.add("hidden");
         }
 
-        function openContactModal() {
-            document.getElementById("contactModal").style.display = "block";
+        // Publier une nouvelle actu
+        function publishNews() {
+            if (currentUser === "") {
+                alert("Veuillez vous connecter d'abord !");
+                return;
+            }
+
+            let title = document.getElementById("title").value;
+            let description = document.getElementById("description").value || "Pas de description.";
+
+            let imageFile = document.getElementById("image").files[0] || document.getElementById("image-camera").files[0];
+            let videoFile = document.getElementById("video").files[0] || document.getElementById("video-camera").files[0];
+
+            if (title.trim() === "") {
+                alert("Le titre est obligatoire !");
+                return;
+            }
+
+            let newArticle = `
+                <div class="news-item">
+                    <h3>${currentUser} a publié :</h3>
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                    ${imageFile ? `<img src="${URL.createObjectURL(imageFile)}" alt="Image">` : ""}
+                    ${videoFile ? `<video controls><source src="${URL.createObjectURL(videoFile)}" type="video/mp4"></video>` : ""}
+                    <div class="feedback-buttons">
+                        <button onclick="addFeedback('👍')">👍</button>
+                        <button onclick="addFeedback('🩷')">🩷</button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById("custom-news").insertAdjacentHTML("afterbegin", newArticle);
+            document.getElementById("title").value = "";
+            document.getElementById("description").value = "";
+            document.getElementById("image").value = "";
+            document.getElementById("video").value = "";
+            document.getElementById("image-camera").value = "";
+            document.getElementById("video-camera").value = "";
+
+            toggleMenu(); // Fermer le menu après publication
         }
 
-        function closeContactModal() {
-            document.getElementById("contactModal").style.display = "none";
+        // Ajouter un feedback (like ou coeur)
+        function addFeedback(feedback) {
+            alert(`Feedback ajouté: ${feedback}`);
         }
-
-        // Gestion du panier
-        let cart = [];
-
-        function addToCart(productName, productPrice) {
-            cart.push({ name: productName, price: productPrice });
-            displayCart();
-        }
-
-        function displayCart() {
-            const cartDiv = document.getElementById("cart");
-            const cartItemsList = cartDiv.querySelector('.cart-items');
-            cartItemsList.innerHTML = '';
-
-            cart.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = `${item.name} - ${item.price}`;
-                cartItemsList.appendChild(li);
-            });
-
-            cartDiv.style.display = cart.length ? 'block' : 'none';
-        }
-
-        function checkout() {
-            alert('Merci pour votre commande!');
-            cart = [];
-            displayCart();
-        }
-
-        // Gestion des formulaires
-        document.getElementById("reservationForm").onsubmit = function(event) {
-            event.preventDefault();
-            alert('Réservation confirmée!');
-            closeReservationModal();
-        };
-
-        document.getElementById("contactForm").onsubmit = function(event) {
-            event.preventDefault();
-            alert('Votre message a été envoyé!');
-            closeContactModal();
-        };
     </script>
 
 </body>
-                   </html>
+                                                                                                              </html>
