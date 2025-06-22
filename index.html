@@ -1,360 +1,1145 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tana Land - Fil d'actualité</title>
-    
-    <!-- Lien vers Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    <meta name="description" content="HOLDEST Marseille - Réparation express de smartphones. Écrans, batteries, logiciel. 6 mois de garantie. Atelier en centre-ville, service rapide et professionnel.">
+    <title>HOLDEST Marseille | Réparation Express de Téléphones</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://js.stripe.com/v3/"></script> <!-- Intégration de Stripe -->
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1e1e2f;
-            color: white;
-            text-align: center;
+    :root {
+        --primary: #0056b3; /* Bleu HOLDEST */
+        --secondary: #FFD700; /* Or pour accent */
+        --dark: #1a1a1a;
+        --light: #f8f9fa;
+        --success: #28a745;
+        --white: #ffffff;
+        --shadow: 0 4px 12px rgba(0, 86, 179, 0.15);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Open Sans', sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+        line-height: 1.7;
+    }
+
+    /* Header stylé avec logo */
+    header {
+        background: var(--white);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 15px 0;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .logo i {
+        color: var(--secondary);
+        margin-right: 10px;
+        font-size: 2rem;
+    }
+
+    /* Navigation moderne */
+    nav ul {
+        display: flex;
+        list-style: none;
+    }
+
+    nav li {
+        margin-left: 30px;
+    }
+
+    nav a {
+        color: var(--dark);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        position: relative;
+        padding: 5px 0;
+        transition: color 0.3s;
+    }
+
+    nav a:hover {
+        color: var(--primary);
+    }
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--secondary);
+        transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+        width: 100%;
+    }
+
+    /* Hero section avec image Marseille */
+    .hero {
+        background: linear-gradient(rgba(0, 86, 179, 0.7), rgba(0, 86, 179, 0.7)), 
+                    url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: var(--white);
+        padding: 0 20px;
+    }
+
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero h1 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 3rem;
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    /* Bouton principal */
+    .btn {
+        display: inline-block;
+        background: var(--secondary);
+        color: var(--primary);
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 6
+    }
+
+    .btn:hover {
+        background: transparent;
+        color: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--secondary);
+        border: 2px solid var(--secondary);
+        margin-left: 15px;
+    }
+
+    .btn-outline:hover {
+        background: var(--secondary);
+        color: var(--primary);
+    }
+
+    /* Sections */
+    .container {
+        max-width: 1200px;
+        margin: 80px auto;
+        padding: 0 20px;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.2rem;
+        color: var(--primary);
+        position: relative;
+        display: inline-block;
+        padding-bottom: 15px;
+    }
+
+    .section-title h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: var(--secondary);
+    }
+
+    .section-title p {
+        color: #666;
+        max-width: 700px;
+        margin: 15px auto 0;
+    }
+
+    /* Services */
+    .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .service-card {
+        background: var(--white);
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s;
+        text-align: center;
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .service-icon {
+        font-size: 2.5rem;
+        color: var(--primary);
+        margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 15px;
+        color: var(--dark);
+    }
+
+    /* À propos */
+    .about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .about-image img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    .about-content h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.8rem;
+        color: var(--primary);
+        margin-bottom: 20px;
+    }
+
+    .about-content p {
+        margin-bottom: 15px;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* Boutique */
+    .shop-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .model-select {
+        padding: 12px 20px;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        font-family: inherit;
+        min-width: 250px;
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .product-card {
+        background: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: all 0.3s;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-image {
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+
+    .product-card:hover .product-image img {
+        transform: scale(1.1);
+    }
+
+    .product-info {
+        padding: 20px;
+    }
+
+    .product-info h3 {
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 10px;
+        color: var(--dark);
+    }
+
+    .product-price {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .product-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    /* Contact */
+    .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+
+    .contact-info h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin-bottom: 20px;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .contact-icon {
+        font-size: 1.2rem;
+        color: var(--secondary);
+        margin-right: 15px;
+        margin-top: 3px;
+    }
+
+    .contact-text h4 {
+        font-family: 'Montserrat', sans-serif;
+        margin-bottom: 5px;
+    }
+
+    .contact-text a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .contact-text a:hover {
+        color: var(--secondary);
+    }
+
+    .social-links {
+        display: flex;
+        margin-top: 30px;
+    }
+
+    .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        color: var(--white);
+        border-radius: 50%;
+        margin-right: 15px;
+        transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+        background: var(--secondary);
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: inherit;
+    }
+
+    .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .contact-form button {
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .contact-form button:hover {
+        background: var(--secondary);
+        color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+        background: var(--primary);
+        color: var(--white);
+        padding: 60px 0 30px;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+    }
+
+    .footer-col h3 {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .footer-col h3::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: var(--secondary);
+    }
+
+    .footer-col ul {
+        list-style: none;
+    }
+
+    .footer-col li {
+        margin-bottom: 10px;
+    }
+
+    .footer-col a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-col a:hover {
+        color: var(--secondary);
+    }
+
+    .copyright {
+        text-align: center;
+        margin-top: 60px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .modal-content {
+        background: var(--white);
+        max-width: 500px;
+        margin: 100px auto;
+        padding: 30px;
+        border-radius: 10px;
+        position: relative;
+        animation: slideDown 0.3s;
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        color: #999;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .close-modal:hover {
+        color: var(--primary);
+    }
+
+    /* Section "Devenir Partenaire" */
+    #partners {
+        background: var(--white);
+        padding: 80px 0;
+    }
+
+    #partners .section-title h2 {
+        color: var(--primary);
+    }
+
+    #partners .about-content {
+        max-width: 600px;
+    }
+
+    #partners .about-content h3 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    #partners .about-content ul {
+        list-style: none;
+        margin-bottom: 30px;
+    }
+
+    #partners .about-content ul li {
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 25px;
+    }
+
+    #partners .about-content ul li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--secondary);
+        font-weight: bold;
+    }
+
+    #partners .about-image img {
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    /* Formulaire de Contact pour Réparateurs */
+    #contact-partners {
+        background: var(--light);
+        padding: 80px 0;
+    }
+
+    #contact-partners .section-title h2 {
+        color: var(--primary);
+    }
+
+    #contact-partners form {
+        max-width: 600px;
+        margin: 0 auto;
+        background: var(--white);
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    #contact-partners input,
+    #contact-partners textarea {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: inherit;
+    }
+
+    #contact-partners textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    #contact-partners button {
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    #contact-partners button:hover {
+        background: var(--secondary);
+        color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+        .about, .contact-container {
+            grid-template-columns: 1fr;
         }
 
-        h1 {
-            background: linear-gradient(90deg, #ff8a00, #e52e71);
-            color: white;
-            padding: 15px;
-            text-transform: uppercase;
+        .about-image {
+            order: -1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
         }
 
-        .menu-btn {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 30px;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            color: white;
+        .logo {
+            margin-bottom: 15px;
         }
 
-        .menu {
-            position: fixed;
-            left: -300px;
-            top: 0;
-            width: 250px;
-            height: 100%;
-            background: #2c2c3a;
-            padding: 20px;
-            transition: left 0.3s;
-            z-index: 1000; /* Ajouter un z-index élevé pour que le menu soit au-dessus des autres éléments */
+        nav ul {
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .menu.open {
-            left: 0;
+        nav li {
+            margin: 0 10px 10px;
         }
 
-        .hidden {
-            display: none;
+        .hero h1 {
+            font-size: 2.2rem;
         }
 
-        input, textarea {
-            width: 90%;
-            padding: 8px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        button {
-            background: #ff8a00;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background: #e52e71;
-        }
-
-        #news-container {
-            max-width: 900px;
-            margin: auto;
-            background: #2c2c3a;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(255, 138, 0, 0.3);
-            text-align: left;
-        }
-
-        .news-item {
-            background: #3a3a4a;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-
-        .news-item img, .news-item video {
-            max-width: 100%;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-
-        /* Fenêtre modale pour l'alerte */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            overflow: auto;
-            padding-top: 60px;
-        }
-
-        .modal-content {
-            background-color: #2c2c3a;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 80%;
-            text-align: center;
-        }
-
-        .close {
-            color: white;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #ff8a00;
-        }
-
-        .feedback {
-            font-size: 20px;
-            margin-top: 10px;
-        }
-
-        .feedback button {
-            margin: 5px;
-            font-size: 20px;
-        }
-
-        .choice-buttons {
-            margin-top: 20px;
-        }
-
-        .file-input-container {
+        .btn-outline {
+            margin-left: 0;
             margin-top: 15px;
         }
 
-        .file-input-container button {
-            margin: 5px;
+        .stats {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero {
+            height: 400px;
         }
 
-        /* Widget RSS */
-        #rss-widget-container {
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            position: relative;
-            background: #2c2c3a;
-            border-radius: 10px;
-            margin-top: 20px;
+        .hero h1 {
+            font-size: 1.8rem;
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
+        .section-title h2 {
+            font-size: 1.8rem;
         }
+    }
+</style>
 
-        .feedback-buttons {
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
 </head>
 <body>
-
-    <h1>🔥 Tana Land - Fil d'actualité 🔥</h1>
-
-    <!-- Bouton du menu -->
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
-
-    <!-- Menu latéral -->
-    <div class="menu" id="menu">
-        <button class="menu-btn close" onclick="toggleMenu()">✖</button>
-        <h2>👤 Connexion</h2>
-        <input type="text" id="username" placeholder="Nom d'utilisateur" required>
-        <button onclick="login()">Se connecter</button>
-        
-        <div id="publish-section" class="hidden">
-            <h2>📢 Publier une actualité</h2>
-            <input type="text" id="title" placeholder="Titre de l'actualité">
-            <textarea id="description" placeholder="Description de l'actualité"></textarea>
-
-            <div class="choice-buttons">
-                <button class="file-input-container" onclick="showImageOptions()"><i class="fas fa-image"></i> Choisir une image</button>
-                <button class="file-input-container" onclick="showVideoOptions()"><i class="fas fa-video"></i> Choisir une vidéo</button>
-            </div>
-
-            <div id="image-options" class="hidden">
-                <input type="file" id="image" accept="image/*" />
-                <p>Ou prenez une photo avec la caméra :</p>
-                <input type="file" id="image-camera" accept="image/*" capture="camera" />
-            </div>
-
-            <div id="video-options" class="hidden">
-                <input type="file" id="video" accept="video/*" />
-                <p>Ou filmez avec la caméra :</p>
-                <input type="file" id="video-camera" accept="video/*" capture="camera" />
-            </div>
-
-            <button onclick="publishNews()">Publier</button>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <i class="fas fa-mobile-alt"></i> HOLDEST
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">À propos</a></li>
+                    <li><a href="#shop">Boutique</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-
-    <!-- Fenêtre modale d'alerte -->
-    <div id="alertModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <p>Connexion réussie !</p>
-        </div>
-    </div>
-
-    <!-- Conteneur de la file d'actualité -->
-    <div id="news-container">
-        <h2>🚀 Actualités</h2>
-        
-        <!-- Actualité par défaut -->
-        <div class="news-item">
-            <h3>🔥 Bienvenue sur Tana Land !</h3>
-            <p>Ceci est une actualité par défaut.</p>
-            <img src="https://mcusercontent.com/ecbcd3e0a3ef2c00dbcaefee8/images/c2f77817-7f68-e79a-2fae-b0df349226c2.jpg" alt="Image par défaut">
-            <div class="feedback-buttons">
-                <button onclick="addFeedback('👍')">👍</button>
-                <button onclick="addFeedback('🩷')">🩷</button>
+    </header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Réparation express de smartphones à Marseille</h1>
+            <p>Chez HOLDEST, nous redonnons vie à vos appareils en moins de 30 minutes avec une garantie de 6 mois sur toutes nos réparations.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn">Prendre rendez-vous</a>
+                <a href="#services" class="btn btn-outline">Nos services</a>
             </div>
         </div>
-
-        <!-- Nouvelles actualités publiées -->
-        <div id="custom-news"></div>
-        
-        <!-- Widget RSS -->
-        <div id="rss-widget-container">
-            <iframe 
-                src="https://rss.app/embed/v1/wall/EfaE5udOLeF3DdzP" 
-                frameborder="0">
-            </iframe>
+    </section>
+    <section id="services" class="container">
+        <div class="section-title">
+            <h2>Nos Services</h2>
+            <p>Des réparations rapides et fiables pour tous les modèles de smartphones</p>
         </div>
-    </div>
-
-    <script>
-        let currentUser = "";
-
-        // Ouvrir/fermer le menu latéral
-        function toggleMenu() {
-            let menu = document.getElementById("menu");
-            menu.classList.toggle("open");
-        }
-
-        // Simuler une connexion
-        function login() {
-            let username = document.getElementById("username").value;
-            if (username.trim() !== "") {
-                currentUser = username;
-                showModal(); // Afficher la fenêtre modale
-                setTimeout(() => {
-                    closeModal();
-                }, 2000);
-                document.getElementById("publish-section").classList.remove("hidden");
-                toggleMenu(); // Fermer le menu après la connexion
-            } else {
-                alert("Veuillez entrer un nom d'utilisateur.");
-            }
-        }
-
-        // Fonction pour afficher la fenêtre modale
-        function showModal() {
-            document.getElementById("alertModal").style.display = "block";
-        }
-
-        // Fonction pour fermer la fenêtre modale
-        function closeModal() {
-            document.getElementById("alertModal").style.display = "none";
-        }
-
-        // Fonction pour afficher les options d'image
-        function showImageOptions() {
-            document.getElementById("image-options").classList.remove("hidden");
-            document.getElementById("video-options").classList.add("hidden");
-        }
-
-        // Fonction pour afficher les options de vidéo
-        function showVideoOptions() {
-            document.getElementById("video-options").classList.remove("hidden");
-            document.getElementById("image-options").classList.add("hidden");
-        }
-
-        // Publier une nouvelle actu
-        function publishNews() {
-            if (currentUser === "") {
-                alert("Veuillez vous connecter d'abord !");
-                return;
-            }
-
-            let title = document.getElementById("title").value;
-            let description = document.getElementById("description").value || "Pas de description.";
-
-            let imageFile = document.getElementById("image").files[0] || document.getElementById("image-camera").files[0];
-            let videoFile = document.getElementById("video").files[0] || document.getElementById("video-camera").files[0];
-
-            if (title.trim() === "") {
-                alert("Le titre est obligatoire !");
-                return;
-            }
-
-            let newArticle = `
-                <div class="news-item">
-                    <h3>${currentUser} a publié :</h3>
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                    ${imageFile ? `<img src="${URL.createObjectURL(imageFile)}" alt="Image">` : ""}
-                    ${videoFile ? `<video controls><source src="${URL.createObjectURL(videoFile)}" type="video/mp4"></video>` : ""}
-                    <div class="feedback-buttons">
-                        <button onclick="addFeedback('👍')">👍</button>
-                        <button onclick="addFeedback('🩷')">🩷</button>
+        <div class="services">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-screen"></i>
+                </div>
+                <h3>Remplacement d'écran</h3>
+                <p>Écrans OLED/AMOLED/LCD originaux ou haute qualité. Réparation en 20-30 minutes.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-battery-full"></i>
+                </div>
+                <h3>Changement de batterie</h3>
+                <p>Batteries neuves avec capacité d'origine. Améliorez l'autonomie de votre appareil.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bug"></i>
+                </div>
+                <h3>Dépannage logiciel</h3>
+                <p>Réinitialisation, suppression de virus, mise à jour et optimisation de votre système.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h3>Connecteurs & ports</h3>
+                <p>Réparation des ports de charge, connecteurs audio et autres problèmes matériels.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <h3>Dégâts des eaux</h3>
+                <p>Nettoyage et réparation après contact avec un liquide. Sauvetage des données.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <h3>Accessoires</h3>
+                <p>Coques, protections d'écran, chargeurs et câbles de qualité pour tous modèles.</p>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>Pourquoi choisir HOLDEST ?</h2>
+            <p>Notre engagement : qualité, rapidité et transparence</p>
+        </div>
+        <div class="about">
+            <div class="about-content">
+                <h3>Votre réparateur de smartphones à Marseille</h3>
+                <p>Fondé en 2015, HOLDEST est devenu la référence pour la réparation de smartphones dans la région marseillaise. Notre atelier situé en centre-ville accueille chaque jour des clients satisfaits par notre professionnalisme.</p>
+                <p>Nous nous engageons à utiliser uniquement des pièces détachées de haute qualité, avec une garantie de 6 mois sur toutes nos réparations. Notre équipe d'experts certifiés intervient sur toutes les marques : Apple, Samsung, Huawei, Xiaomi, Oppo et bien d'autres.</p>
+                <p>Chez HOLDEST, nous comprenons à quel point votre smartphone est important dans votre vie quotidienne. C'est pourquoi nous nous efforçons de fournir un service rapide (souvent en moins de 30 minutes), transparent et à des prix compétitifs.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10 000+</div>
+                        <div class="stat-label">Appareils réparés</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30 min</div>
+                        <div class="stat-label">Temps moyen</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99%</div>
+                        <div class="stat-label">Clients satisfaits</div>
                     </div>
                 </div>
-            `;
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Atelier HOLDEST Marseille">
+            </div>
+        </div>
+    </section>
+    <section id="shop" class="container">
+        <div class="section-title">
+            <h2>Notre Boutique</h2>
+            <p>Accessoires et pièces détachées pour votre smartphone</p>
+        </div>
+        <div class="shop-controls">
+            <h3>Sélectionnez votre modèle :</h3>
+            <select id="phoneSelect" class="model-select">
+                <option value="">Tous les modèles</option>
+                <option value="iphone">iPhone</option>
+                <option value="samsung">Samsung</option>
+                <option value="huawei">Huawei</option>
+                <option value="xiaomi">Xiaomi</option>
+                <option value="oppo">Oppo</option>
+            </select>
+        </div>
+        <div class="products-grid" id="productList">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1603921326210-6edd2d60ca68?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Écran iPhone">
+                </div>
+                <div class="product-info">
+                    <h3>Écran iPhone 12 Pro Max</h3>
+                    <div class="product-price">149€</div>
+                    <p class="product-description">Écran OLED original avec tactile haute sensibilité. Garantie 6 mois.</p>
+                    <button class="btn" onclick="openModal('Écran iPhone 12 Pro Max')">Commander</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Coque Samsung">
+                </div>
+                <div class="product-info">
+                    <h3>Coque Samsung S22 Ultra</h3>
+                    <div class="product-price">29€</div>
+                    <p class="product-description">Coque en silicone anti-choc avec protection renforcée aux angles.</p>
+                    <button class="btn" onclick="openModal('Coque Samsung S22 Ultra')">Commander</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1604054924398-bf21ec5b7fb5?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Batterie Huawei">
+                </div>
+                <div class="product-info">
+                    <h3>Batterie Huawei P30 Pro</h3>
+                    <div class="product-price">69€</div>
+                    <p class="product-description">Batterie neuve 4200mAh avec capacité d'origine. Installation incluse.</p>
+                    <button class="btn" onclick="openModal('Batterie Huawei P30 Pro')">Commander</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Chargeur rapide">
+                </div>
+                <div class="product-info">
+                    <h3>Chargeur Rapide 45W</h3>
+                    <div class="product-price">35€</div>
+                    <p class="product-description">Chargeur original Samsung avec câble USB-C inclus. Charge ultra-rapide.</p>
+                    <button class="btn" onclick="openModal('Chargeur Rapide 45W')">Commander</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="container">
+        <div class="section-title">
+            <h2>Contactez-nous</h2>
+            <p>Notre équipe est à votre disposition pour toute question ou demande de rendez-vous</p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>HOLDEST Marseille</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Adresse</h4>
+                        <p>123 Rue de la République<br>13001 Marseille</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Téléphone</h4>
+                        <p><a href="tel:+33491234567">04 91 23 45 67</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p><a href="mailto:contact@holdest-marseille.fr">contact@holdest-marseille.fr</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Horaires</h4>
+                        <p>Lundi - Vendredi : 9h - 19h<br>Samedi : 9h - 18h<br>Dimanche : Fermé</p>
+                    </div>
+                </div>
+                <h3 style="margin-top: 30px;">Suivez HOLDEST</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/holdest_marseille" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/holdest.marseille" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/holdest_marseille" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.tiktok.com/@holdest_marseille" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                    <input type="email" name="email" placeholder="Votre email" required>
+                    <input type="tel" name="phone" placeholder="Votre téléphone" required>
+                    <select name="service" required>
+                        <option value="">Type de service demandé</option>
+                        <option value="screen">Remplacement d'écran</option>
+                        <option value="battery">Changement de batterie</option>
+                        <option value="software">Dépannage logiciel</option>
+                        <option value="water">Dégât des eaux</option>
+                        <option value="other">Autre problème</option>
+                    </select>
+                    <textarea name="message" placeholder="Décrivez votre problème ou demande..." required></textarea>
+                    <button type="submit">Envoyer la demande</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>HOLDEST</h3>
+                <p>Réparation express de smartphones à Marseille. Service rapide, pièces de qualité et garantie 6 mois sur toutes nos interventions.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#services">Remplacement d'écran</a></li>
+                    <li><a href="#services">Changement de batterie</a></li>
+                    <li><a href="#services">Dépannage logiciel</a></li>
+                    <li><a href="#services">Réparation de connecteurs</a></li>
+                    <li><a href="#services">Dégâts des eaux</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Liens utiles</h3>
+                <ul>
+                    
 
-            document.getElementById("custom-news").insertAdjacentHTML("afterbegin", newArticle);
-            document.getElementById("title").value = "";
-            document.getElementById("description").value = "";
-            document.getElementById("image").value = "";
-            document.getElementById("video").value = "";
-            document.getElementById("image-camera").value = "";
-            document.getElementById("video-camera").value = "";
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                                            <li><a href="#about">À propos</a></li>
+                    <li><a href="#shop">Boutique</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                    <li><a href="#">Politique de confidentialité</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Rue de la République, 13001 Marseille</li>
+                    <li><i class="fas fa-phone-alt"></i> 04 91 23 45 67</li>
+                    <li><i class="fas fa-envelope"></i> contact@holdest-marseille.fr</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 HOLDEST Marseille - Tous droits réservés</p>
+        </div>
+    </footer>
 
-            toggleMenu(); // Fermer le menu après publication
+    <!-- Section "Devenir Partenaire" -->
+    <section id="partners" class="container">
+        <div class="section-title">
+            <h2>Devenir Partenaire Réparateur</h2>
+            <p>Rejoignez notre réseau et recevez des clients sans effort</p>
+        </div>
+        <div class="about">
+            <div class="about-content">
+                <h3>Comment ça marche ?</h3>
+                <ul>
+                    <li>Nous vous envoyons des clients près de votre atelier.</li>
+                    <li>Vous payez une commission uniquement sur les réparations effectuées.</li>
+                    <li>Bénéficiez de notre marketing et de notre plateforme.</li>
+                </ul>
+                <a href="#contact-partners" class="btn">Postuler comme partenaire</a>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Réparateur smartphone">
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulaire de Contact pour Réparateurs -->
+    <section id="contact-partners" class="container">
+        <div class="section-title">
+            <h2>Contact Partenariats</h2>
+        </div>
+        <form id="partnerForm">
+            <input type="text" name="name" placeholder="Nom de l'atelier" required>
+            <input type="tel" name="phone" placeholder="Téléphone" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="text" name="address" placeholder="Adresse de l'atelier" required>
+            <textarea name="experience" placeholder="Décrivez votre expérience (marques réparées, etc.)" required></textarea>
+            <button type="submit">Envoyer la demande</button>
+        </form>
+    </section>
+
+    <!-- Modal de commande -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2>Commander un produit</h2>
+            <form id="orderForm">
+                <input type="hidden" id="productName" name="product">
+                <input type="text" name="name" placeholder="Votre nom complet" required>
+                <input type="email" name="email" placeholder="Votre email" required>
+                <input type="tel" name="phone" placeholder="Votre numéro de téléphone" required>
+                <select name="delivery" required>
+                    <option value="">Mode de réception</option>
+                    <option value="pickup">Retrait en magasin</option>
+                    <option value="delivery">Livraison à domicile (+5€)</option>
+                </select>
+                <textarea name="notes" placeholder="Notes supplémentaires (optionnel)"></textarea>
+                <button type="submit">Valider la commande</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Intégration de Stripe pour les paiements -->
+    <script>
+        const stripe = Stripe('YOUR_STRIPE_PUBLIC_KEY'); // Remplacez par votre clé publique Stripe
+
+        // Fonction pour ouvrir le modal de commande
+        function openModal(productName) {
+            document.getElementById('productName').value = productName;
+            document.getElementById('orderModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
-        // Ajouter un feedback (like ou coeur)
-        function addFeedback(feedback) {
-            alert(`Feedback ajouté: ${feedback}`);
+        // Fonction pour fermer le modal
+        function closeModal() {
+            document.getElementById('orderModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
+
+        // Gestion de la soumission du formulaire de commande
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Créez une session de paiement avec Stripe
+            const response = await fetch('/create-checkout-session', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    productName: document.getElementById('productName').value,
+                    amount: 1000, // Montant en centimes (ex : 1000 = 10€)
+                }),
+            });
+
+            const session = await response.json();
+
+            // Redirigez l'utilisateur vers la page de paiement Stripe
+            const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+            if (result.error) {
+                alert(result.error.message);
+            }
+        });
+
+        // Gestion de la soumission du formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Votre message a bien été envoyé ! Nous vous répondrons dans les plus brefs délais.');
+            this.reset();
+        });
+
+        // Gestion de la soumission du formulaire de partenariat
+        document.getElementById('partnerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Votre demande de partenariat a bien été envoyée ! Nous vous contacterons sous 48h.');
+            this.reset();
+        });
+
+        // Filtrage des produits (simplifié pour l'exemple)
+        document.getElementById('phoneSelect').addEventListener('change', function() {
+            const selectedBrand = this.value.toLowerCase();
+            const products = document.querySelectorAll('.product-card');
+            
+            products.forEach(product => {
+                const productTitle = product.querySelector('h3').textContent.toLowerCase();
+                if (!selectedBrand || productTitle.includes(selectedBrand)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
     </script>
-
 </body>
-                                                                                                              </html>
+</html>
